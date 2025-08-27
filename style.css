@@ -1,13 +1,13 @@
 /* ===== Sidebar (เหมือน mockup) ===== */
 .sidebar {
-  width: 220px;
+  width: 200px;
   background: #191919;
   position: fixed;
   inset: 0 auto 0 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 28px 16px;
+  padding: 48px 16px;
   border-right: 1px solid #222;
   box-shadow: 2px 0 12px #0002;
   z-index: 10;
@@ -43,7 +43,7 @@ main{ margin-left:220px; padding:48px 28px; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;              /* กินเต็มจอ */
+  height: 80vh;              /* กินเต็มจอ */
   padding-left: 80px;         /* เว้นระยะจาก Navbar (ปรับได้ 60–100px) */
   box-sizing: border-box;
 }
