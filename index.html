@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Portfolio - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="sidebar"></div>
+    <script src="nav.js"></script>
+    <script>
+        renderSidebar('home');   // หน้าไหนก็ส่ง key ของหน้านั้น: 'home' | 'resume' | 'portfolio' | 'contact'
+    </script>
+
+    <main>
+        <section class="hero">
+            <h1>Hello();</h1>
+            <h2>I'm <span class="accent">Nail</span>,<br>Game Developer</h2>
+            <p class="subtitle">Front End Developer</p>
+            <a href="portfolio.html" class="btn">Let's go'</a>
+        </section>
+    </main>
+
+    <script src="nav.js"></script>
+    <script>renderSidebar('home');</script>
+</body>
+
+</html>

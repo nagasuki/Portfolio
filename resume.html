@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail – Resume</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            margin: 0;
+            background: #0e0f11;
+            color: #d9dce1;
+            font-family: Arial, sans-serif;
+        }
+
+        .resume-container {
+            margin-left: 220px;
+            /* เว้นที่ให้ sidebar */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        #pdf-canvas {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .6);
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+
+    <!-- PDF preview -->
+    <div class="resume-container">
+        <canvas id="the-canvas"></canvas>
+    </div>
+
+    <script src="nav.js"></script>
+    <script>
+        renderSidebar('resume');   // หน้าไหนก็ส่ง key ของหน้านั้น: 'home' | 'resume' | 'portfolio' | 'contact'
+    </script>
+    
+    <script type="module">
+        import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76/build/pdf.mjs';
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76/build/pdf.worker.mjs';
+
+        const url = 'assets/resume.pdf'; // ไฟล์ PDF ของคุณ
+
+        const canvas = document.getElementById('the-canvas');
+        const ctx = canvas.getContext('2d');
+
+        async function renderFitPage() {
+            const pdf = await pdfjsLib.getDocument(url).promise;
+            const page = await pdf.getPage(1);
+
+            // ความกว้างของ viewport จริง
+            const viewport = page.getViewport({ scale: 1 });
+            const screenWidth = window.innerWidth;   // ความกว้างจอจริง
+            const screenHeight = window.innerHeight; // ความสูงจอจริง
+
+            // scale เพื่อให้พอดีกับจอ (เลือกตัวเล็กสุดของ width/height)
+            const scaleX = screenWidth / viewport.width;
+            const scaleY = screenHeight / viewport.height;
+            const scale = Math.min(scaleX, scaleY);
+
+            const scaledViewport = page.getViewport({ scale });
+
+            canvas.width = scaledViewport.width;
+            canvas.height = scaledViewport.height;
+
+            await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
+            console.log("✅ Resume fitted to screen");
+        }
+
+        renderFitPage();
+
+        // ถ้าขยาย/ย่อหน้าต่างใหม่ ให้ render ใหม่
+        window.addEventListener('resize', () => renderFitPage());
+    </script>
+</body>
+
+</html>

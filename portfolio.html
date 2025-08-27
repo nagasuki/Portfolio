@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail Portfolio - Projects</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="sidebar"></div>
+    <script src="nav.js"></script>
+    <script>
+        renderSidebar('portfolio');   // หน้าไหนก็ส่ง key ของหน้านั้น: 'home' | 'resume' | 'portfolio' | 'contact'
+    </script>
+
+    <main>
+        <section>
+            <h1 class="nail-header">My Projects</h1>
+            <div class="project">
+                <h3>Tower Maker</h3>
+                <p>Idle Tycoon Roguelike game in Unity.</p>
+            </div>
+            <div class="project">
+                <h3>Fortune Kingdom</h3>
+                <p>Isometric/Idle/Roguelike hybrid game.</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

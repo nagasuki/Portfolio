@@ -1,0 +1,107 @@
+/* ===== Sidebar (เหมือน mockup) ===== */
+.sidebar {
+  width: 220px;
+  background: #191919;
+  position: fixed;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 16px;
+  border-right: 1px solid #222;
+  box-shadow: 2px 0 12px #0002;
+  z-index: 10;
+}
+.sidebar .brand { text-align: center; }
+.sidebar .logo { font-size: 44px; font-weight: 800; color: #00ffc2; line-height: 1; }
+.sidebar h2 { margin-top: 8px; font-size: 22px; }
+.sidebar .role { font-size: 12px; color: #9aa0a6; margin-top: 4px; }
+.sidebar nav ul { list-style: none; margin-top: 28px; }
+.sidebar nav li { margin: 10px 0; }
+.sidebar nav a {
+  display: block; padding: 12px 16px; border-radius: 12px;
+  color: #eaeef2; text-decoration: none; transition: .2s;
+}
+.sidebar nav a:hover { background: #202223; }
+.sidebar nav a.active {
+  background: #00ffc2; color: #191919; font-weight: 600;
+  box-shadow: 0 0 18px rgba(0,255,194,.35);
+}
+.sidebar footer {
+  border-top: 1px solid #2a2a2a; margin-top: 24px; padding-top: 14px;
+  text-align: center; color: #8a8f98; font-size: 12px;
+}
+
+/* ===== Layout ===== */
+body{ background:#0e0f11; color:#d9dce1; font-family: Arial, sans-serif; }
+main{ margin-left:220px; padding:48px 28px; }
+.nail-header{ text-align:left; font-size:2rem; }
+
+/* ===== Hero (หน้า Home) ===== */
+/* Hero Section (หน้า Home) */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;              /* กินเต็มจอ */
+  padding-left: 80px;         /* เว้นระยะจาก Navbar (ปรับได้ 60–100px) */
+  box-sizing: border-box;
+}
+
+.hero h1 {
+  font-size: 48px;            /* Hello(); */
+  color: #cfd6dd;
+  margin: 0 0 20px 0;
+}
+
+.hero h2 {
+  font-size: 64px;            /* I'm Nail, Game Developer */
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+}
+
+.hero .accent {
+  color: #00ffc2;             /* ไฮไลท์ชื่อ */
+}
+
+.hero .subtitle {
+  font-size: 22px;
+  color: #9aa0a6;
+  margin-bottom: 30px;
+}
+
+/* ===== Button แบบสั้นเหมือนภาพ ===== */
+.btn{
+  display:inline-block; width:85px; padding:6px 14px;
+  border:1px solid #00ffc2; border-radius:4px; font-size:.9rem; font-weight:500;
+  color:#00ffc2; background:transparent; text-decoration:none; cursor:pointer;
+  transition:.25s;
+}
+.btn:hover{ background:#00ffc2; color:#191919; }
+
+/* ===== Resume Viewer (pdf.mjs) ===== */
+.resume-wrap{ max-width:980px; margin:auto; }
+.viewer-card{
+  background:#121212; border:1px solid #202020; border-radius:16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+.viewer-toolbar{
+  display:flex; align-items:center; gap:8px; padding:12px 14px; background:#151515; border-bottom:1px solid #242424;
+}
+.btn-ghost{
+  padding:6px 10px; border:1px solid #00ffc2; color:#00ffc2; background:transparent;
+  border-radius:6px; font-size:.9rem; cursor:pointer; transition:.25s;
+}
+.btn-ghost:disabled{ opacity:.4; cursor:not-allowed; }
+.btn-ghost:hover{ background:#00ffc2; color:#191919; }
+.page-indicator{ color:#9aa0a6; font-size:.9rem; }
+.viewer-canvas{ background:#0d0d0d; display:block; margin:auto; width:100%; }
+
+/* Responsive */
+@media (max-width: 840px){
+  .sidebar{ width: 200px; }
+  main{ margin-left:200px; }
+  .hero h2{ font-size:38px; }
+}
