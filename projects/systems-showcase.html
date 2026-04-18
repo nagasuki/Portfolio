@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Showcase | Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="detail-page">
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html#top">Nagasuki / GAME DEVELOPER</a>
+    <nav class="site-nav">
+      <a href="../index.html#about">&lt;/About Me&gt;</a>
+      <a href="../index.html#featured">&lt;/Project&gt;</a>
+      <a href="../index.html#skills">&lt;/Skill&gt;</a>
+      <a href="../index.html#contact">&lt;/Contact&gt;</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <a class="back-link" href="../index.html#featured">Back to Portfolio</a>
+      <article class="detail-hero-card">
+        <div class="detail-hero-copy">
+          <p class="eyebrow">Case Study / Systems and Architecture</p>
+          <h1>Systems Showcase</h1>
+          <p class="hero-text">
+            A portfolio entry dedicated to the systems work I can own directly:
+            item architecture, player controller feel, deterministic multiplayer logic,
+            and production-ready technical structure.
+          </p>
+          <ul class="detail-stack">
+            <li>KCC Controller</li>
+            <li>Photon Quantum</li>
+            <li>VContainer</li>
+            <li>UniTask</li>
+            <li>Production UI</li>
+          </ul>
+        </div>
+        <div class="detail-hero-media">
+          <div class="placeholder-content">
+            <span class="placeholder-label">Latest Demo</span>
+            <h2 class="placeholder-title">Systems Showcase</h2>
+            <p class="placeholder-caption">Replace this area with your best current prototype or systems demo clip.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">What I Did</p>
+        <h2>Core systems I can build</h2>
+        <ul class="detail-list">
+          <li>Designed a scalable Player Inventory System that connects cleanly with the gameplay loop.</li>
+          <li>Developed a Player Item System that supports a wide range of item behaviors and future extension.</li>
+          <li>Built a KCC Third Person Controller focused on responsiveness and control quality.</li>
+          <li>Improved player input feel to a competitive standard through practical tuning and testing.</li>
+          <li>Worked with Photon Quantum to create deterministic multiplayer gameplay systems.</li>
+          <li>Applied VContainer and UniTask to keep the architecture maintainable and extensible.</li>
+        </ul>
+      </article>
+
+      <article class="detail-block">
+        <p class="eyebrow">How It Works</p>
+        <h2>System design approach</h2>
+        <ul class="detail-list">
+          <li>Gameplay systems are split by responsibility so player features stay readable and easier to scale.</li>
+          <li>Dependency injection reduces tight coupling and makes services easier to replace or test.</li>
+          <li>Async workflows are organized with UniTask to keep loading and sequencing cleaner.</li>
+          <li>Deterministic multiplayer logic is kept authoritative and predictable for stable sync behavior.</li>
+          <li>Player feel improvements are treated as a system-level concern, not just a final polish pass.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">Why It Matters</p>
+        <h2>Production value behind the implementation</h2>
+        <p>
+          This kind of work demonstrates not only feature implementation, but also the ability
+          to define architecture, protect scalability, and create systems that teams can continue
+          building on without large rewrites later.
+        </p>
+      </article>
+
+      <article class="code-block">
+        <p class="eyebrow">Code Style</p>
+        <h2>Example structure</h2>
+        <pre><code>public sealed class InventoryService
+{
+    private readonly Dictionary&lt;int, ItemData&gt; items = new();
+
+    public bool TryAdd(ItemData item)
+    {
+        if (items.ContainsKey(item.Id))
+        {
+            return false;
+        }
+
+        items.Add(item.Id, item);
+        return true;
+    }
+}</code></pre>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

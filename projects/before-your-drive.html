@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeforeYourDrive | Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="detail-page">
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html#top">Nagasuki / GAME DEVELOPER</a>
+    <nav class="site-nav">
+      <a href="../index.html#about">&lt;/About Me&gt;</a>
+      <a href="../index.html#featured">&lt;/Project&gt;</a>
+      <a href="../index.html#skills">&lt;/Skill&gt;</a>
+      <a href="../index.html#contact">&lt;/Contact&gt;</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <a class="back-link" href="../index.html#featured">Back to Portfolio</a>
+      <article class="detail-hero-card">
+        <div class="detail-hero-copy">
+          <p class="eyebrow">Case Study / VR Driving Simulation</p>
+          <h1>BeforeYourDrive</h1>
+          <p class="hero-text">
+            A VR practice game used for pre-driving performance testing, focused on car control,
+            VR integration, and compatibility across multiple headset setups.
+          </p>
+          <ul class="detail-stack">
+            <li>Unity</li>
+            <li>VR</li>
+            <li>Simulation</li>
+            <li>Vehicle Control</li>
+            <li>Hardware Support</li>
+          </ul>
+        </div>
+        <div class="detail-hero-media">
+          <div class="placeholder-content">
+            <span class="placeholder-label">Gameplay Clip</span>
+            <h2 class="placeholder-title">BeforeYourDrive</h2>
+            <p class="placeholder-caption">Replace this area with cockpit view, training sequence, or VR demo footage.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">What I Did</p>
+        <h2>VR interaction and driving flow</h2>
+        <ul class="detail-list">
+          <li>Wrote basic vehicle movement scripts for the simulation flow.</li>
+          <li>Handled VR setup and project-side integration for in-headset interaction.</li>
+          <li>Adjusted the project to support multiple VR headset brands more reliably.</li>
+          <li>Helped shape a practical experience for simulation-based training delivery.</li>
+        </ul>
+      </article>
+
+      <article class="detail-block">
+        <p class="eyebrow">System Flow</p>
+        <h2>How the simulation works</h2>
+        <ul class="detail-list">
+          <li>Input from the VR environment drives movement and training interaction.</li>
+          <li>Vehicle state is updated through dedicated control scripts that keep behavior understandable and adjustable.</li>
+          <li>VR rig setup is coordinated with scene logic so the player perspective stays stable and usable.</li>
+          <li>Compatibility checks reduce friction when changing between supported headset setups.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">Key Takeaway</p>
+        <h2>Why this project matters</h2>
+        <p>
+          This project shows my ability to work on applied simulation software where gameplay code
+          needs to be dependable, practical, and compatible with real deployment constraints.
+        </p>
+      </article>
+
+      <article class="code-block">
+        <p class="eyebrow">Code Style</p>
+        <h2>Example structure</h2>
+        <pre><code>public sealed class VehicleDriveController : MonoBehaviour
+{
+    [SerializeField] private float acceleration = 8f;
+    [SerializeField] private float turnSpeed = 90f;
+
+    public void Tick(float throttle, float steering)
+    {
+        transform.position += transform.forward * throttle * acceleration * Time.deltaTime;
+        transform.Rotate(Vector3.up, steering * turnSpeed * Time.deltaTime);
+    }
+}</code></pre>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

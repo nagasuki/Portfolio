@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buddy Beater | Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="detail-page">
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html#top">Nagasuki / GAME DEVELOPER</a>
+    <nav class="site-nav">
+      <a href="../index.html#about">&lt;/About Me&gt;</a>
+      <a href="../index.html#featured">&lt;/Project&gt;</a>
+      <a href="../index.html#skills">&lt;/Skill&gt;</a>
+      <a href="../index.html#contact">&lt;/Contact&gt;</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <a class="back-link" href="../index.html#featured">Back to Portfolio</a>
+      <article class="detail-hero-card">
+        <div class="detail-hero-copy">
+          <p class="eyebrow">Case Study / Multiplayer Battle Royale</p>
+          <h1>Buddy Beater</h1>
+          <p class="hero-text">
+            A multiplayer-focused project where I worked on networking-related gameplay,
+            server connectivity, and the technical bridge between gameplay code and backend services.
+          </p>
+          <ul class="detail-stack">
+            <li>Unity</li>
+            <li>C#</li>
+            <li>AWS GameLift</li>
+            <li>REST API</li>
+            <li>Multiplayer</li>
+          </ul>
+        </div>
+        <div class="detail-hero-media">
+          <div class="placeholder-content">
+            <span class="placeholder-label">Gameplay Clip</span>
+            <h2 class="placeholder-title">Buddy Beater</h2>
+            <p class="placeholder-caption">Replace this area with trailer, gameplay, or match footage.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">What I Did</p>
+        <h2>Gameplay and network-connected systems</h2>
+        <ul class="detail-list">
+          <li>Implemented network movement logic for multiplayer character control.</li>
+          <li>Connected the game client to AWS GameLift for server-side session usage.</li>
+          <li>Integrated REST API communication between client systems and backend data.</li>
+          <li>Worked on keeping gameplay flow readable while respecting multiplayer constraints.</li>
+        </ul>
+      </article>
+
+      <article class="detail-block">
+        <p class="eyebrow">System Flow</p>
+        <h2>How the main parts connect</h2>
+        <ul class="detail-list">
+          <li>Player input is translated into movement commands and validated through the multiplayer layer.</li>
+          <li>Match/session setup is coordinated with GameLift so the client can join the correct server context.</li>
+          <li>Client services communicate with REST endpoints for persistent or external data needs.</li>
+          <li>Gameplay logic stays modular so networking concerns do not completely dominate feature code.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">Key Takeaway</p>
+        <h2>Why this project matters</h2>
+        <p>
+          This project highlights my ability to work in a real multiplayer production context
+          where gameplay programming, online infrastructure, and backend connectivity need to work together.
+        </p>
+      </article>
+
+      <article class="code-block">
+        <p class="eyebrow">Code Style</p>
+        <h2>Example structure</h2>
+        <pre><code>public sealed class PlayerNetworkMover : MonoBehaviour
+{
+    [SerializeField] private CharacterController controller;
+    [SerializeField] private float speed = 6f;
+
+    public void Simulate(Vector2 moveInput)
+    {
+        var move = new Vector3(moveInput.x, 0f, moveInput.y);
+        controller.Move(move * speed * Time.deltaTime);
+    }
+}</code></pre>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiyanon Sahasukee | Gameplay Programmer</title>
+  <title>Tiyanon Sahasukee | Portfolio</title>
   <meta
     name="description"
     content="Minimal green and black portfolio for Tiyanon Sahasukee, a gameplay programmer focused on scalable systems, game feel, deterministic multiplayer, and production-ready UI."
@@ -20,19 +20,19 @@
   <div class="background-grid" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="brand" href="#top">TIYANON//GAMEDEV</a>
+    <a class="brand" href="#top">Nagasuki / GAME DEVELOPER</a>
     <nav class="site-nav">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+      <a href="#about">&lt;/About Me&gt;</a>
+      <a href="#featured">&lt;/Project&gt;</a>
+      <a href="#skills">&lt;/Skill&gt;</a>
+      <a href="#contact">&lt;/Contact&gt;</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero section">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Gameplay Programmer | Unity | Multiplayer | System Architecture</p>
+        <p class="eyebrow">Gameplay Programmer | Tools Programmer | Multiplayer Game</p>
         <h1>
           Tiyanon
           <span>Sahasukee</span>
@@ -44,7 +44,7 @@
         </p>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="#projects">View Projects</a>
+          <a class="button button-primary" href="#featured">View Projects</a>
           <a class="button button-secondary" href="#contact">Contact Me</a>
         </div>
 
@@ -89,29 +89,54 @@
         <h2>Building gameplay that feels sharp while staying scalable under production pressure</h2>
       </div>
 
-      <div class="about-grid">
-        <article class="card reveal">
+      <div class="about-layout">
+        <article class="profile-card reveal">
+          <div class="profile-frame">
+            <img src="assets/profile.jpg" alt="Portrait of Tiyanon Sahasukee">
+          </div>
+          <div class="profile-meta">
+            <p class="eyebrow">Profile</p>
+            <h3>Tiyanon Sahasukee</h3>
+            <p>
+              Gameplay Programmer focused on scalable systems, multiplayer architecture,
+              and input feel tuned for strong player experience.
+            </p>
+          </div>
+        </article>
+
+        <div class="about-grid">
+          <article class="card reveal">
           <p>
             My work is centered around gameplay systems that are clean at the code level
             and satisfying at the player level. I design systems with long-term scalability
             in mind, from item architecture and controller behavior to maintainable
             gameplay loops that can evolve with production needs.
           </p>
-        </article>
-        <article class="card reveal reveal-delay">
+          </article>
+          <article class="card reveal reveal-delay">
           <p>
             I care deeply about game feel and measurable player experience. That includes
             improving input precision, controller responsiveness, and UI usability while
             keeping the underlying architecture readable, testable, and easy for teams to extend.
           </p>
-        </article>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="section">
+    <section id="featured" class="section">
       <div class="section-heading reveal">
-        <p class="eyebrow">Core Contributions</p>
-        <h2>Systems and features I can design, build, and scale in real projects</h2>
+        <p class="eyebrow">Proudest Projects</p>
+        <h2>The three projects I am most proud to showcase</h2>
+      </div>
+
+      <div id="showcase-grid" class="showcase-grid reveal"></div>
+    </section>
+
+    <section id="all-projects" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">More Projects</p>
+        <h2>Other work, systems, and production experience</h2>
       </div>
 
       <div class="projects-grid">
@@ -164,13 +189,13 @@
 
     <section id="skills" class="section">
       <div class="section-heading reveal">
-        <p class="eyebrow">Key Strengths</p>
-        <h2>Technical strengths shaped around scalability, feel, and multiplayer precision</h2>
+        <p class="eyebrow">Skills</p>
+        <h2>Hard skills and soft skills I bring into game production</h2>
       </div>
 
       <div class="skills-layout">
         <div class="skill-group card reveal">
-          <h3>Gameplay Systems</h3>
+          <h3>Hard Skills</h3>
           <div class="tags">
             <span>C#</span>
             <span>System Design</span>
@@ -178,14 +203,7 @@
             <span>Item Behaviors</span>
             <span>Gameplay Loop Design</span>
             <span>Maintainable Codebase</span>
-          </div>
-        </div>
-
-        <div class="skill-group card reveal reveal-delay">
-          <h3>Multiplayer & Tech</h3>
-          <div class="tags">
             <span>Photon Quantum</span>
-            <span>Deterministic Networking</span>
             <span>VContainer</span>
             <span>UniTask</span>
             <span>Unity 2D/3D</span>
@@ -193,91 +211,21 @@
           </div>
         </div>
 
-        <div class="skill-group card reveal">
-          <h3>Player Experience</h3>
+        <div class="skill-group card reveal reveal-delay">
+          <h3>Soft Skills</h3>
           <div class="tags">
-            <span>Game Feel</span>
-            <span>Input Precision</span>
-            <span>Responsive Controller</span>
-            <span>Competitive Tuning</span>
+            <span>System Thinking</span>
+            <span>Problem Solving</span>
+            <span>Cross-Team Communication</span>
+            <span>Self-Learning</span>
+            <span>Adaptability</span>
+            <span>Working Under Pressure</span>
             <span>Scalability</span>
             <span>Maintainability</span>
+            <span>Player Empathy</span>
+            <span>Iteration Mindset</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Current Value</p>
-        <h2>What I bring to a modern game team right now</h2>
-      </div>
-
-      <div class="about-grid">
-        <article class="card reveal">
-          <p>
-            Strong in gameplay system design, not only implementation. I can shape system
-            structure from concept to working production code with clear extension paths.
-          </p>
-        </article>
-        <article class="card reveal reveal-delay">
-          <p>
-            Skilled in game feel and player experience, with a focus on tuning movement,
-            input, and control quality in ways that are noticeable and measurable.
-          </p>
-        </article>
-        <article class="card reveal">
-          <p>
-            Comfortable working with advanced multiplayer architecture, especially
-            deterministic networking where sync accuracy directly affects gameplay quality.
-          </p>
-        </article>
-        <article class="card reveal reveal-delay">
-          <p>
-            Focused on scalability and maintainability so teams can keep building on top
-            of systems instead of rewriting them as production grows.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Experience & Education</p>
-        <h2>Background in professional production and academic training</h2>
-      </div>
-
-      <div class="about-grid">
-        <article class="card reveal">
-          <p>
-            <strong>Game Developer, Cointalk.co,ltd</strong><br>
-            January 2022 - December 2022<br>
-            Worked on Buddy Beater, an NFT multiplayer game, with a focus on networked
-            character movement, GameLift server support, and API integration.
-          </p>
-        </article>
-        <article class="card reveal reveal-delay">
-          <p>
-            <strong>Simulation Support Intern, Loxley Simulation Technology Co., Ltd.</strong><br>
-            May 2021 - August 2021<br>
-            Supported simulation and VR-related development, including work connected to
-            driving simulation and practical training solutions.
-          </p>
-        </article>
-        <article class="card reveal">
-          <p>
-            <strong>Bangkok University</strong><br>
-            June 2018 - December 2021<br>
-            Game and Interactive Media Department, School of Information Technology and
-            Innovation. GPA 3.42 with 2nd Class Honors.
-          </p>
-        </article>
-        <article class="card reveal reveal-delay">
-          <p>
-            <strong>Languages</strong><br>
-            Thai (Native), English (Intermediate), Chinese (Beginner)
-          </p>
-        </article>
       </div>
     </section>
 
