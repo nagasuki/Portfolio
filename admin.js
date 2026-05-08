@@ -41,7 +41,8 @@ async function api(path, options = {}) {
   if (!response.ok) {
     if (contentType.includes("application/json")) {
       const payload = await response.json().catch(() => ({}));
-      throw new Error(payload.error || `Request failed with ${response.status}`);
+      const message = [payload.error, payload.detail].filter(Boolean).join(": ");
+      throw new Error(message || `Request failed with ${response.status}`);
     }
 
     const text = await response.text().catch(() => "");
