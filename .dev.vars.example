@@ -1,0 +1,2 @@
+ASSET_BASE_URL="https://your-public-r2-base-url.example.com/"
+ADMIN_TOKEN="replace-with-a-local-dev-token"
