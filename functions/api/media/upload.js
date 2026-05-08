@@ -1,4 +1,4 @@
-import { json, requireAdmin } from "../_lib/portfolio.js";
+import { buildAssetUrl, json, requireAdmin } from "../_lib/portfolio.js";
 
 export async function onRequestPost(context) {
   const unauthorized = await requireAdmin(context.request, context.env);
@@ -23,6 +23,6 @@ export async function onRequestPost(context) {
   return json({
     ok: true,
     key,
-    url: `${context.env.ASSET_BASE_URL || ""}${key}`
+    url: buildAssetUrl(context.env.ASSET_BASE_URL || "", key)
   });
 }

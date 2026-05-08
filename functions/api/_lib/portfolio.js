@@ -34,9 +34,11 @@ export function projectFromRow(row, assetBaseUrl = "") {
     return null;
   }
 
-  const coverImage = row.cover_image_key
-    ? `${assetBaseUrl}${row.cover_image_key}`
-    : "";
+  const coverImage = buildAssetUrl(assetBaseUrl, row.cover_image_key);
+  const mediaSrc =
+    row.media_type === "video" && row.media_src && !/^https?:\/\//i.test(row.media_src)
+      ? buildAssetUrl(assetBaseUrl, row.media_src)
+      : row.media_src;
 
   return {
     slug: row.slug,
@@ -48,7 +50,7 @@ export function projectFromRow(row, assetBaseUrl = "") {
     featured: Boolean(row.featured),
     sortOrder: row.sort_order,
     mediaType: row.media_type,
-    mediaSrc: row.media_src,
+    mediaSrc,
     placeholder: row.placeholder,
     stack: parseArray(row.stack),
     responsibilities: parseArray(row.responsibilities),
@@ -62,6 +64,18 @@ export function projectFromRow(row, assetBaseUrl = "") {
     published: Boolean(row.published),
     updatedAt: row.updated_at
   };
+}
+
+export function buildAssetUrl(assetBaseUrl = "", key = "") {
+  if (!assetBaseUrl || !key) {
+    return "";
+  }
+
+  const normalizedBase = assetBaseUrl.endsWith("/")
+    ? assetBaseUrl
+    : `${assetBaseUrl}/`;
+  const normalizedKey = key.startsWith("/") ? key.slice(1) : key;
+  return `${normalizedBase}${normalizedKey}`;
 }
 
 export async function requireAdmin(request, env) {
