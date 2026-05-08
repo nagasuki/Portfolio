@@ -1,0 +1,15 @@
+{
+  "name": "portfolio-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy .",
+    "d1:migrate": "wrangler d1 execute portfolio-db --file=./migrations/0001_init.sql",
+    "d1:seed": "node ./scripts/build-seed-sql.mjs && wrangler d1 execute portfolio-db --file=./.tmp/seed.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.15.2"
+  }
+}

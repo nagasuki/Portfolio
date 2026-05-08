@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="detail-page">
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#top">Nagasuki / GAME DEVELOPER</a>
+    <nav class="site-nav">
+      <a href="index.html#about">&lt;/About Me&gt;</a>
+      <a href="index.html#featured">&lt;/Project&gt;</a>
+      <a href="index.html#skills">&lt;/Skill&gt;</a>
+      <a href="index.html#contact">&lt;/Contact&gt;</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <a class="back-link" href="index.html#featured">Back to Portfolio</a>
+      <article class="detail-hero-card">
+        <div class="detail-hero-copy">
+          <p class="eyebrow" id="project-kicker">Case Study</p>
+          <h1 id="project-title">Loading project...</h1>
+          <p class="hero-text" id="project-description"></p>
+          <ul class="detail-stack" id="project-stack"></ul>
+        </div>
+        <div class="detail-hero-media" id="project-media"></div>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">What I Did</p>
+        <h2>Key responsibilities</h2>
+        <ul class="detail-list" id="project-responsibilities"></ul>
+      </article>
+
+      <article class="detail-block">
+        <p class="eyebrow">System Flow</p>
+        <h2>How the main parts connect</h2>
+        <ul class="detail-list" id="project-system-flow"></ul>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">Key Takeaway</p>
+        <h2 id="project-takeaway-title"></h2>
+        <p id="project-takeaway-body"></p>
+      </article>
+
+      <article class="code-block">
+        <p class="eyebrow">Code Style</p>
+        <h2 id="project-code-title"></h2>
+        <pre><code id="project-code-example"></code></pre>
+      </article>
+    </section>
+  </main>
+
+  <script type="module" src="project.js"></script>
+</body>
+</html>

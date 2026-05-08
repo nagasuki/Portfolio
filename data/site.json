@@ -1,0 +1,266 @@
+{
+  "site": {
+    "brand": "Nagasuki / GAME DEVELOPER",
+    "hero": {
+      "eyebrow": "Gameplay Programmer | Tools Programmer | Multiplayer Game",
+      "name": {
+        "first": "Tiyanon",
+        "last": "Sahasukee"
+      },
+      "description": "Gameplay Programmer focused on scalable gameplay systems, competitive-level input feel, and production-ready architecture. I build systems that are responsive for players, maintainable for teams, and ready to grow with the project.",
+      "metrics": [
+        {
+          "value": "KCC",
+          "label": "Third Person Controller"
+        },
+        {
+          "value": "Quantum",
+          "label": "Deterministic Multiplayer"
+        },
+        {
+          "value": "UI",
+          "label": "Production-Ready Workflow"
+        }
+      ],
+      "focusLabel": "CURRENT PROFILE",
+      "focusList": [
+        "Gameplay System Design and Architecture",
+        "Deterministic Multiplayer with Photon Quantum",
+        "Game Feel, Input Precision, and Production UI"
+      ],
+      "status": {
+        "title": "Available for gameplay and systems-focused roles",
+        "subtitle": "Bangkok, Thailand / On-site / Remote"
+      }
+    },
+    "about": {
+      "heading": "Building gameplay that feels sharp while staying scalable under production pressure",
+      "profileEyebrow": "Profile",
+      "profileName": "Tiyanon Sahasukee",
+      "profileDescription": "Gameplay Programmer focused on scalable systems, multiplayer architecture, and input feel tuned for strong player experience.",
+      "profileImage": "assets/profile.jpg",
+      "cards": [
+        "My work is centered around gameplay systems that are clean at the code level and satisfying at the player level. I design systems with long-term scalability in mind, from item architecture and controller behavior to maintainable gameplay loops that can evolve with production needs.",
+        "I care deeply about game feel and measurable player experience. That includes improving input precision, controller responsiveness, and UI usability while keeping the underlying architecture readable, testable, and easy for teams to extend."
+      ]
+    },
+    "skills": {
+      "heading": "Hard skills and soft skills I bring into game production",
+      "hard": [
+        "C#",
+        "System Design",
+        "Inventory Architecture",
+        "Item Behaviors",
+        "Gameplay Loop Design",
+        "Maintainable Codebase",
+        "Photon Quantum",
+        "VContainer",
+        "UniTask",
+        "Unity 2D/3D",
+        "Production UI"
+      ],
+      "soft": [
+        "System Thinking",
+        "Problem Solving",
+        "Cross-Team Communication",
+        "Self-Learning",
+        "Adaptability",
+        "Working Under Pressure",
+        "Scalability",
+        "Maintainability",
+        "Player Empathy",
+        "Iteration Mindset"
+      ]
+    },
+    "contact": {
+      "heading": "Let's build games that feel solid, smart, and memorable",
+      "description": "You can reach me directly for game development roles, Unity projects, multiplayer features, or VR/AR work.",
+      "links": [
+        {
+          "label": "Phone",
+          "href": "tel:0827279101"
+        },
+        {
+          "label": "Email",
+          "href": "mailto:tiyanon.sa@gmail.com"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/nail462438"
+        },
+        {
+          "label": "Facebook",
+          "href": "https://www.facebook.com/nailza.hit/"
+        },
+        {
+          "label": "Instagram",
+          "href": "https://www.instagram.com/nailinsky/"
+        },
+        {
+          "label": "E-Portfolio",
+          "href": "https://nail462438.wixsite.com/nagasukiport"
+        }
+      ]
+    },
+    "moreProjects": [
+      {
+        "index": "01",
+        "title": "Inventory & Item Systems",
+        "description": "Designed and implemented a scalable Player Inventory System and Player Item System that support flexible item management, varied item behaviors, and clean integration with the core gameplay loop.",
+        "tags": [
+          "Scalable Architecture",
+          "Gameplay Integration",
+          "Future Expansion Ready"
+        ]
+      },
+      {
+        "index": "02",
+        "title": "KCC Controller & Game Feel",
+        "description": "Built a KCC Third Person Controller with a strong focus on responsiveness and smooth control. Improved player input feeling to a level comparable to competitive mobile action games, producing clearly better test feedback.",
+        "tags": [
+          "Responsive Movement",
+          "Competitive Input Feel",
+          "Player Experience Tuning"
+        ]
+      },
+      {
+        "index": "03",
+        "title": "Deterministic Multiplayer & Architecture",
+        "description": "Worked with Photon Quantum to build gameplay systems that require accurate deterministic sync across the network, while using VContainer and UniTask to keep the project architecture maintainable and production-friendly.",
+        "tags": [
+          "Photon Quantum",
+          "VContainer",
+          "UniTask"
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "slug": "buddy-beater",
+      "title": "Buddy Beater",
+      "kicker": "Multiplayer Battle Royale",
+      "summary": "A gameplay showcase centered on multiplayer action, readable combat flow, and live-service-ready technical foundations.",
+      "description": "A multiplayer-focused project where I worked on networking-related gameplay, server connectivity, and the technical bridge between gameplay code and backend services.",
+      "tags": [
+        "Unity",
+        "Networking",
+        "AWS GameLift"
+      ],
+      "featured": true,
+      "sortOrder": 1,
+      "mediaType": "placeholder",
+      "mediaSrc": "",
+      "placeholder": "Gameplay Clip Ready",
+      "stack": [
+        "Unity",
+        "C#",
+        "AWS GameLift",
+        "REST API",
+        "Multiplayer"
+      ],
+      "responsibilities": [
+        "Implemented network movement logic for multiplayer character control.",
+        "Connected the game client to AWS GameLift for server-side session usage.",
+        "Integrated REST API communication between client systems and backend data.",
+        "Worked on keeping gameplay flow readable while respecting multiplayer constraints."
+      ],
+      "systemFlow": [
+        "Player input is translated into movement commands and validated through the multiplayer layer.",
+        "Match/session setup is coordinated with GameLift so the client can join the correct server context.",
+        "Client services communicate with REST endpoints for persistent or external data needs.",
+        "Gameplay logic stays modular so networking concerns do not completely dominate feature code."
+      ],
+      "takeawayTitle": "Why this project matters",
+      "takeawayBody": "This project highlights my ability to work in a real multiplayer production context where gameplay programming, online infrastructure, and backend connectivity need to work together.",
+      "codeTitle": "Example structure",
+      "codeExample": "public sealed class PlayerNetworkMover : MonoBehaviour\n{\n    [SerializeField] private CharacterController controller;\n    [SerializeField] private float speed = 6f;\n\n    public void Simulate(Vector2 moveInput)\n    {\n        var move = new Vector3(moveInput.x, 0f, moveInput.y);\n        controller.Move(move * speed * Time.deltaTime);\n    }\n}",
+      "published": true
+    },
+    {
+      "slug": "before-your-drive",
+      "title": "BeforeYourDrive",
+      "kicker": "VR Driving Simulation",
+      "summary": "A VR project focused on practical interaction, smooth driving control, and hardware compatibility across multiple headset setups.",
+      "description": "A VR practice game used for pre-driving performance testing, focused on car control, VR integration, and compatibility across multiple headset setups.",
+      "tags": [
+        "VR",
+        "Simulation",
+        "Unity"
+      ],
+      "featured": true,
+      "sortOrder": 2,
+      "mediaType": "placeholder",
+      "mediaSrc": "",
+      "placeholder": "Add Trailer / Gameplay",
+      "stack": [
+        "Unity",
+        "VR",
+        "Simulation",
+        "Vehicle Control",
+        "Hardware Support"
+      ],
+      "responsibilities": [
+        "Wrote basic vehicle movement scripts for the simulation flow.",
+        "Handled VR setup and project-side integration for in-headset interaction.",
+        "Adjusted the project to support multiple VR headset brands more reliably.",
+        "Helped shape a practical experience for simulation-based training delivery."
+      ],
+      "systemFlow": [
+        "Input from the VR environment drives movement and training interaction.",
+        "Vehicle state is updated through dedicated control scripts that keep behavior understandable and adjustable.",
+        "VR rig setup is coordinated with scene logic so the player perspective stays stable and usable.",
+        "Compatibility checks reduce friction when changing between supported headset setups."
+      ],
+      "takeawayTitle": "Why this project matters",
+      "takeawayBody": "This project shows my ability to work on applied simulation software where gameplay code needs to be dependable, practical, and compatible with real deployment constraints.",
+      "codeTitle": "Example structure",
+      "codeExample": "public sealed class VehicleDriveController : MonoBehaviour\n{\n    [SerializeField] private float acceleration = 8f;\n    [SerializeField] private float turnSpeed = 90f;\n\n    public void Tick(float throttle, float steering)\n    {\n        transform.position += transform.forward * throttle * acceleration * Time.deltaTime;\n        transform.Rotate(Vector3.up, steering * turnSpeed * Time.deltaTime);\n    }\n}",
+      "published": true
+    },
+    {
+      "slug": "systems-showcase",
+      "title": "Systems Showcase",
+      "kicker": "Controller, Inventory, Multiplayer",
+      "summary": "A dedicated slot for your current gameplay work such as KCC controller feel, inventory architecture, item systems, and Photon Quantum features.",
+      "description": "A portfolio entry dedicated to the systems work I can own directly: item architecture, player controller feel, deterministic multiplayer logic, and production-ready technical structure.",
+      "tags": [
+        "KCC",
+        "Photon Quantum",
+        "Architecture"
+      ],
+      "featured": true,
+      "sortOrder": 3,
+      "mediaType": "placeholder",
+      "mediaSrc": "",
+      "placeholder": "Drop in Latest Demo",
+      "stack": [
+        "KCC Controller",
+        "Photon Quantum",
+        "VContainer",
+        "UniTask",
+        "Production UI"
+      ],
+      "responsibilities": [
+        "Designed a scalable Player Inventory System that connects cleanly with the gameplay loop.",
+        "Developed a Player Item System that supports a wide range of item behaviors and future extension.",
+        "Built a KCC Third Person Controller focused on responsiveness and control quality.",
+        "Improved player input feel to a competitive standard through practical tuning and testing.",
+        "Worked with Photon Quantum to create deterministic multiplayer gameplay systems.",
+        "Applied VContainer and UniTask to keep the architecture maintainable and extensible."
+      ],
+      "systemFlow": [
+        "Gameplay systems are split by responsibility so player features stay readable and easier to scale.",
+        "Dependency injection reduces tight coupling and makes services easier to replace or test.",
+        "Async workflows are organized with UniTask to keep loading and sequencing cleaner.",
+        "Deterministic multiplayer logic is kept authoritative and predictable for stable sync behavior.",
+        "Player feel improvements are treated as a system-level concern, not just a final polish pass."
+      ],
+      "takeawayTitle": "Production value behind the implementation",
+      "takeawayBody": "This kind of work demonstrates not only feature implementation, but also the ability to define architecture, protect scalability, and create systems that teams can continue building on without large rewrites later.",
+      "codeTitle": "Example structure",
+      "codeExample": "public sealed class InventoryService\n{\n    private readonly Dictionary<int, ItemData> items = new();\n\n    public bool TryAdd(ItemData item)\n    {\n        if (items.ContainsKey(item.Id))\n        {\n            return false;\n        }\n\n        items.Add(item.Id, item);\n        return true;\n    }\n}",
+      "published": true
+    }
+  ]
+}

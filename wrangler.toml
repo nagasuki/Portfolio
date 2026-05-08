@@ -1,0 +1,16 @@
+name = "portfolio-cloudflare"
+compatibility_date = "2026-05-08"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "portfolio-db"
+database_id = "12890e6c-bbd4-4ca9-8095-37525690611a"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "portfolio-media"
+
+[vars]
+ASSET_BASE_URL = "https://4956abaf4d499cde396a8c7ebf6061c6.r2.cloudflarestorage.com/portfolio-media"
+ADMIN_TOKEN = "naillovejan180842"

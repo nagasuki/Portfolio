@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <main class="admin-shell">
+    <section class="admin-auth card">
+      <p class="eyebrow">Admin</p>
+      <h1>Portfolio Dashboard</h1>
+      <p class="admin-copy">Enter your `ADMIN_TOKEN` from Cloudflare to edit public content.</p>
+      <div class="admin-auth-row">
+        <input id="admin-token" type="password" placeholder="Enter admin token">
+        <button id="admin-connect" class="button button-primary" type="button">Connect</button>
+      </div>
+      <p id="admin-status" class="admin-status">Waiting for connection...</p>
+    </section>
+
+    <section class="admin-layout">
+      <aside class="card admin-sidebar">
+        <div class="admin-sidebar-head">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2>Entries</h2>
+          </div>
+          <button id="new-project" class="button button-secondary" type="button">New</button>
+        </div>
+        <div id="project-list" class="admin-project-list"></div>
+      </aside>
+
+      <div class="admin-panels">
+        <section class="card admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="eyebrow">Site Content</p>
+              <h2>Homepage copy</h2>
+            </div>
+            <button id="save-site" class="button button-primary" type="button">Save Site</button>
+          </div>
+          <div class="admin-grid">
+            <label>Hero Eyebrow <input id="site-hero-eyebrow" type="text"></label>
+            <label>First Name <input id="site-first-name" type="text"></label>
+            <label>Last Name <input id="site-last-name" type="text"></label>
+            <label>Hero Description <textarea id="site-hero-description" rows="4"></textarea></label>
+            <label>About Heading <textarea id="site-about-heading" rows="3"></textarea></label>
+            <label>Profile Name <input id="site-profile-name" type="text"></label>
+            <label>Profile Description <textarea id="site-profile-description" rows="3"></textarea></label>
+            <label>Contact Heading <textarea id="site-contact-heading" rows="3"></textarea></label>
+            <label>Contact Description <textarea id="site-contact-description" rows="3"></textarea></label>
+          </div>
+        </section>
+
+        <section class="card admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="eyebrow">Project Editor</p>
+              <h2 id="editor-title">New project</h2>
+            </div>
+            <div class="admin-actions">
+              <button id="delete-project" class="button button-secondary" type="button">Delete</button>
+              <button id="save-project" class="button button-primary" type="button">Save Project</button>
+            </div>
+          </div>
+          <div class="admin-grid">
+            <label>Slug <input id="project-slug" type="text"></label>
+            <label>Title <input id="project-title-field" type="text"></label>
+            <label>Kicker <input id="project-kicker-field" type="text"></label>
+            <label>Summary <textarea id="project-summary" rows="3"></textarea></label>
+            <label>Description <textarea id="project-description-field" rows="4"></textarea></label>
+            <label>Featured
+              <select id="project-featured">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </label>
+            <label>Sort Order <input id="project-sort-order" type="number" min="0"></label>
+            <label>Media Type
+              <select id="project-media-type">
+                <option value="placeholder">Placeholder</option>
+                <option value="video">Video</option>
+                <option value="embed">Embed</option>
+              </select>
+            </label>
+            <label>Media URL <input id="project-media-src" type="text"></label>
+            <label>Placeholder Label <input id="project-placeholder" type="text"></label>
+            <label>R2 Cover Key <input id="project-cover-image-key" type="text" placeholder="projects/buddy-beater/cover.jpg"></label>
+            <label>Upload Cover Image
+              <div class="admin-upload-row">
+                <input id="project-cover-upload" type="file" accept="image/*">
+                <button id="upload-cover" class="button button-secondary" type="button">Upload</button>
+              </div>
+            </label>
+            <label>Tags (one per line) <textarea id="project-tags" rows="5"></textarea></label>
+            <label>Stack (one per line) <textarea id="project-stack-field" rows="5"></textarea></label>
+            <label>Responsibilities (one per line) <textarea id="project-responsibilities-field" rows="6"></textarea></label>
+            <label>System Flow (one per line) <textarea id="project-system-flow-field" rows="6"></textarea></label>
+            <label>Takeaway Title <input id="project-takeaway-title-field" type="text"></label>
+            <label>Takeaway Body <textarea id="project-takeaway-body-field" rows="4"></textarea></label>
+            <label>Code Title <input id="project-code-title-field" type="text"></label>
+            <label>Code Example <textarea id="project-code-example-field" rows="10"></textarea></label>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

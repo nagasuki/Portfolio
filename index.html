@@ -20,7 +20,7 @@
   <div class="background-grid" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="brand" href="#top">Nagasuki / GAME DEVELOPER</a>
+    <a class="brand" href="#top" id="brand-link">Nagasuki / GAME DEVELOPER</a>
     <nav class="site-nav">
       <a href="#about">&lt;/About Me&gt;</a>
       <a href="#featured">&lt;/Project&gt;</a>
@@ -32,12 +32,12 @@
   <main id="top">
     <section class="hero section">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Gameplay Programmer | Tools Programmer | Multiplayer Game</p>
+        <p class="eyebrow" id="hero-eyebrow">Gameplay Programmer | Tools Programmer | Multiplayer Game</p>
         <h1>
-          Tiyanon
-          <span>Sahasukee</span>
+          <span id="hero-first-name">Tiyanon</span>
+          <span id="hero-last-name">Sahasukee</span>
         </h1>
-        <p class="hero-text">
+        <p class="hero-text" id="hero-description">
           Gameplay Programmer focused on scalable gameplay systems, competitive-level
           input feel, and production-ready architecture. I build systems that are
           responsive for players, maintainable for teams, and ready to grow with the project.
@@ -48,36 +48,19 @@
           <a class="button button-secondary" href="#contact">Contact Me</a>
         </div>
 
-        <ul class="hero-metrics">
-          <li>
-            <strong>KCC</strong>
-            <span>Third Person Controller</span>
-          </li>
-          <li>
-            <strong>Quantum</strong>
-            <span>Deterministic Multiplayer</span>
-          </li>
-          <li>
-            <strong>UI</strong>
-            <span>Production-Ready Workflow</span>
-          </li>
-        </ul>
+        <ul class="hero-metrics" id="hero-metrics"></ul>
       </div>
 
       <aside class="hero-panel reveal reveal-delay">
         <div class="panel-scanline"></div>
-        <p class="panel-label">CURRENT PROFILE</p>
-        <ul class="focus-list">
-          <li>Gameplay System Design and Architecture</li>
-          <li>Deterministic Multiplayer with Photon Quantum</li>
-          <li>Game Feel, Input Precision, and Production UI</li>
-        </ul>
+        <p class="panel-label" id="hero-focus-label">CURRENT PROFILE</p>
+        <ul class="focus-list" id="hero-focus-list"></ul>
 
         <div class="status-card">
           <span class="status-dot"></span>
           <div>
-            <p>Available for gameplay and systems-focused roles</p>
-            <small>Bangkok, Thailand / On-site / Remote</small>
+            <p id="hero-status-title">Available for gameplay and systems-focused roles</p>
+            <small id="hero-status-subtitle">Bangkok, Thailand / On-site / Remote</small>
           </div>
         </div>
       </aside>
@@ -86,18 +69,18 @@
     <section id="about" class="section">
       <div class="section-heading reveal">
         <p class="eyebrow">About Me</p>
-        <h2>Building gameplay that feels sharp while staying scalable under production pressure</h2>
+        <h2 id="about-heading">Building gameplay that feels sharp while staying scalable under production pressure</h2>
       </div>
 
       <div class="about-layout">
         <article class="profile-card reveal">
           <div class="profile-frame">
-            <img src="assets/profile.jpg" alt="Portrait of Tiyanon Sahasukee">
+            <img id="profile-image" src="assets/profile.jpg" alt="Portrait of Tiyanon Sahasukee">
           </div>
           <div class="profile-meta">
-            <p class="eyebrow">Profile</p>
-            <h3>Tiyanon Sahasukee</h3>
-            <p>
+            <p class="eyebrow" id="profile-eyebrow">Profile</p>
+            <h3 id="profile-name">Tiyanon Sahasukee</h3>
+            <p id="profile-description">
               Gameplay Programmer focused on scalable systems, multiplayer architecture,
               and input feel tuned for strong player experience.
             </p>
@@ -106,7 +89,7 @@
 
         <div class="about-grid">
           <article class="card reveal">
-          <p>
+          <p id="about-card-1">
             My work is centered around gameplay systems that are clean at the code level
             and satisfying at the player level. I design systems with long-term scalability
             in mind, from item architecture and controller behavior to maintainable
@@ -114,7 +97,7 @@
           </p>
           </article>
           <article class="card reveal reveal-delay">
-          <p>
+          <p id="about-card-2">
             I care deeply about game feel and measurable player experience. That includes
             improving input precision, controller responsiveness, and UI usability while
             keeping the underlying architecture readable, testable, and easy for teams to extend.
@@ -139,92 +122,24 @@
         <h2>Other work, systems, and production experience</h2>
       </div>
 
-      <div class="projects-grid">
-        <article class="project-card reveal">
-          <div class="project-index">01</div>
-          <h3>Inventory & Item Systems</h3>
-          <p>
-            Designed and implemented a scalable Player Inventory System and Player Item
-            System that support flexible item management, varied item behaviors, and clean
-            integration with the core gameplay loop.
-          </p>
-          <ul>
-            <li>Scalable Architecture</li>
-            <li>Gameplay Integration</li>
-            <li>Future Expansion Ready</li>
-          </ul>
-        </article>
-
-        <article class="project-card reveal reveal-delay">
-          <div class="project-index">02</div>
-          <h3>KCC Controller & Game Feel</h3>
-          <p>
-            Built a KCC Third Person Controller with a strong focus on responsiveness and
-            smooth control. Improved player input feeling to a level comparable to
-            competitive mobile action games, producing clearly better test feedback.
-          </p>
-          <ul>
-            <li>Responsive Movement</li>
-            <li>Competitive Input Feel</li>
-            <li>Player Experience Tuning</li>
-          </ul>
-        </article>
-
-        <article class="project-card reveal">
-          <div class="project-index">03</div>
-          <h3>Deterministic Multiplayer & Architecture</h3>
-          <p>
-            Worked with Photon Quantum to build gameplay systems that require accurate
-            deterministic sync across the network, while using VContainer and UniTask to
-            keep the project architecture maintainable and production-friendly.
-          </p>
-          <ul>
-            <li>Photon Quantum</li>
-            <li>VContainer</li>
-            <li>UniTask</li>
-          </ul>
-        </article>
-      </div>
+      <div id="more-projects-grid" class="projects-grid"></div>
     </section>
 
     <section id="skills" class="section">
       <div class="section-heading reveal">
         <p class="eyebrow">Skills</p>
-        <h2>Hard skills and soft skills I bring into game production</h2>
+        <h2 id="skills-heading">Hard skills and soft skills I bring into game production</h2>
       </div>
 
       <div class="skills-layout">
         <div class="skill-group card reveal">
           <h3>Hard Skills</h3>
-          <div class="tags">
-            <span>C#</span>
-            <span>System Design</span>
-            <span>Inventory Architecture</span>
-            <span>Item Behaviors</span>
-            <span>Gameplay Loop Design</span>
-            <span>Maintainable Codebase</span>
-            <span>Photon Quantum</span>
-            <span>VContainer</span>
-            <span>UniTask</span>
-            <span>Unity 2D/3D</span>
-            <span>Production UI</span>
-          </div>
+          <div class="tags" id="hard-skills-tags"></div>
         </div>
 
         <div class="skill-group card reveal reveal-delay">
           <h3>Soft Skills</h3>
-          <div class="tags">
-            <span>System Thinking</span>
-            <span>Problem Solving</span>
-            <span>Cross-Team Communication</span>
-            <span>Self-Learning</span>
-            <span>Adaptability</span>
-            <span>Working Under Pressure</span>
-            <span>Scalability</span>
-            <span>Maintainability</span>
-            <span>Player Empathy</span>
-            <span>Iteration Mindset</span>
-          </div>
+          <div class="tags" id="soft-skills-tags"></div>
         </div>
       </div>
     </section>
@@ -232,23 +147,16 @@
     <section id="contact" class="section contact-section">
       <div class="contact-card reveal">
         <p class="eyebrow">Contact</p>
-        <h2>Let's build games that feel solid, smart, and memorable</h2>
-        <p>
+        <h2 id="contact-heading">Let's build games that feel solid, smart, and memorable</h2>
+        <p id="contact-description">
           You can reach me directly for game development roles, Unity projects,
           multiplayer features, or VR/AR work.
         </p>
-        <div class="contact-links">
-          <a href="tel:0827279101">082-727-9101</a>
-          <a href="mailto:tiyanon.sa@gmail.com">tiyanon.sa@gmail.com</a>
-          <a href="https://github.com/nail462438" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.facebook.com/nailza.hit/" target="_blank" rel="noreferrer">Facebook</a>
-          <a href="https://www.instagram.com/nailinsky/" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://nail462438.wixsite.com/nagasukiport" target="_blank" rel="noreferrer">E-Portfolio</a>
-        </div>
+        <div class="contact-links" id="contact-links"></div>
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

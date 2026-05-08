@@ -415,6 +415,17 @@ h2 {
   object-fit: cover;
 }
 
+.showcase-cover-image,
+.detail-hero-media iframe,
+.detail-hero-media video,
+.detail-hero-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  object-fit: cover;
+}
+
 .showcase-placeholder {
   position: absolute;
   inset: 0;
@@ -721,6 +732,128 @@ h2 {
   text-transform: uppercase;
 }
 
+.admin-page {
+  min-height: 100vh;
+}
+
+.admin-shell {
+  width: min(calc(100% - 32px), 1400px);
+  margin: 0 auto;
+  padding: 28px 0 72px;
+}
+
+.admin-copy,
+.admin-status,
+.admin-grid label {
+  color: var(--muted);
+}
+
+.admin-auth,
+.admin-sidebar,
+.admin-panel {
+  background: linear-gradient(180deg, rgba(12, 28, 18, 0.92), rgba(5, 12, 8, 0.98));
+}
+
+.admin-auth {
+  margin-bottom: 24px;
+}
+
+.admin-auth-row,
+.admin-sidebar-head,
+.admin-panel-head,
+.admin-actions,
+.admin-upload-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-auth-row {
+  justify-content: flex-start;
+  margin: 20px 0 12px;
+}
+
+.admin-auth-row input,
+.admin-grid input,
+.admin-grid textarea,
+.admin-grid select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(3, 9, 5, 0.8);
+  color: var(--text);
+  font: inherit;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.admin-sidebar,
+.admin-panel {
+  padding: 24px;
+}
+
+.admin-panels {
+  display: grid;
+  gap: 20px;
+}
+
+.admin-project-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-project-item {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(6, 16, 10, 0.85);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-project-item span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+}
+
+.admin-project-item.is-active {
+  border-color: rgba(123, 196, 145, 0.4);
+  background: rgba(22, 46, 30, 0.95);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-grid label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.admin-grid label:has(textarea) {
+  grid-column: 1 / -1;
+}
+
+.admin-status[data-error="true"] {
+  color: #ffb2b2;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -773,7 +906,9 @@ h2 {
   .detail-grid,
   .about-layout,
   .about-grid,
-  .skills-layout {
+  .skills-layout,
+  .admin-layout,
+  .admin-grid {
     grid-template-columns: 1fr;
   }
 
@@ -810,7 +945,12 @@ h2 {
   .hero-actions,
   .hero-metrics,
   .contact-links,
-  .showcase-actions {
+  .showcase-actions,
+  .admin-auth-row,
+  .admin-panel-head,
+  .admin-actions,
+  .admin-sidebar-head,
+  .admin-upload-row {
     grid-template-columns: 1fr;
     flex-direction: column;
   }
