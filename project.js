@@ -78,6 +78,17 @@ function renderMedia(project) {
     return;
   }
 
+  if (project.mediaType === "image" && (project.coverImage || project.mediaSrc)) {
+    container.innerHTML = `
+      <img
+        src="${escapeHtml(project.coverImage || project.mediaSrc)}"
+        alt="${escapeHtml(project.title)}"
+        class="showcase-cover-image"
+      >
+    `;
+    return;
+  }
+
   if (project.coverImage) {
     container.innerHTML = `
       <img
@@ -114,8 +125,6 @@ async function bootstrap() {
   setText("project-description", project.description);
   setText("project-takeaway-title", project.takeawayTitle);
   setText("project-takeaway-body", project.takeawayBody);
-  setText("project-code-title", project.codeTitle);
-  setText("project-code-example", project.codeExample);
   renderList("project-stack", project.stack);
   renderList("project-responsibilities", project.responsibilities);
   renderList("project-system-flow", project.systemFlow);

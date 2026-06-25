@@ -166,23 +166,31 @@ function renderFeaturedProjects(projects) {
                 allowfullscreen
               ></iframe>
             `
-            : item.coverImage
+            : item.mediaType === "image" && (item.coverImage || item.mediaSrc)
               ? `
                 <img
-                  src="${escapeHtml(item.coverImage)}"
+                  src="${escapeHtml(item.coverImage || item.mediaSrc)}"
                   alt="${escapeHtml(item.title)}"
                   class="showcase-cover-image"
                 >
               `
-              : `
-                <div class="showcase-placeholder">
-                  <div class="placeholder-content">
-                    <span class="placeholder-label">${escapeHtml(item.placeholder)}</span>
-                    <h3 class="placeholder-title">${escapeHtml(item.title)}</h3>
-                    <p class="placeholder-caption">${escapeHtml(item.kicker)}</p>
+              : item.coverImage
+                ? `
+                  <img
+                    src="${escapeHtml(item.coverImage)}"
+                    alt="${escapeHtml(item.title)}"
+                    class="showcase-cover-image"
+                  >
+                `
+                : `
+                  <div class="showcase-placeholder">
+                    <div class="placeholder-content">
+                      <span class="placeholder-label">${escapeHtml(item.placeholder)}</span>
+                      <h3 class="placeholder-title">${escapeHtml(item.title)}</h3>
+                      <p class="placeholder-caption">${escapeHtml(item.kicker)}</p>
+                    </div>
                   </div>
-                </div>
-              `;
+                `;
 
       const tags = renderList(item.tags || [], (tag) => `<li>${escapeHtml(tag)}</li>`);
 

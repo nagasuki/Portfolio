@@ -36,7 +36,7 @@ export function projectFromRow(row, assetBaseUrl = "") {
 
   const coverImage = buildAssetUrl(assetBaseUrl, row.cover_image_key);
   const mediaSrc =
-    row.media_type === "video" && row.media_src && !/^https?:\/\//i.test(row.media_src)
+    ["image", "video"].includes(row.media_type) && row.media_src && !/^https?:\/\//i.test(row.media_src)
       ? buildAssetUrl(assetBaseUrl, row.media_src)
       : row.media_src;
 

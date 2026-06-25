@@ -686,6 +686,10 @@ h2 {
   margin-top: 22px;
 }
 
+.detail-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .detail-block h2,
 .code-block h2 {
   margin-bottom: 14px;
@@ -812,17 +816,42 @@ h2 {
 
 .admin-project-item {
   display: grid;
-  gap: 6px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
   padding: 14px 16px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: rgba(6, 16, 10, 0.85);
   color: var(--text);
+  cursor: grab;
+}
+
+.admin-project-item:active {
+  cursor: grabbing;
+}
+
+.admin-project-main {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
   text-align: left;
   cursor: pointer;
 }
 
-.admin-project-item span {
+.admin-project-main strong,
+.admin-project-main span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-project-main span {
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.78rem;
@@ -831,6 +860,36 @@ h2 {
 .admin-project-item.is-active {
   border-color: rgba(123, 196, 145, 0.4);
   background: rgba(22, 46, 30, 0.95);
+}
+
+.admin-project-item.is-dragging {
+  opacity: 0.62;
+}
+
+.admin-project-item.is-drop-target {
+  border-color: rgba(123, 196, 145, 0.65);
+}
+
+.admin-project-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.admin-project-move {
+  min-width: 52px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(98, 255, 151, 0.05);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.admin-project-move:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
 }
 
 .admin-grid {

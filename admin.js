@@ -2,7 +2,9 @@ const state = {
   token: sessionStorage.getItem("portfolio-admin-token") || "",
   site: null,
   projects: [],
-  selectedSlug: null
+  selectedSlug: null,
+  draggingSlug: null,
+  isReordering: false
 };
 
 function linesToArray(value) {
@@ -24,6 +26,21 @@ function setStatus(message, isError = false) {
 
   status.textContent = message;
   status.dataset.error = isError ? "true" : "false";
+}
+
+function sortedProjects(projects = state.projects) {
+  return [...projects].sort((a, b) => {
+    const orderA = Number.isFinite(Number(a.sortOrder)) ? Number(a.sortOrder) : 0;
+    const orderB = Number.isFinite(Number(b.sortOrder)) ? Number(b.sortOrder) : 0;
+    return orderA - orderB;
+  });
+}
+
+function normalizeProjectOrder(projects) {
+  return projects.map((project, index) => ({
+    ...project,
+    sortOrder: index + 1
+  }));
 }
 
 async function api(path, options = {}) {
@@ -72,23 +89,93 @@ function renderProjectList() {
   }
 
   list.innerHTML = state.projects
-    .map((project) => `
-      <button
-        type="button"
-        class="admin-project-item${project.slug === state.selectedSlug ? " is-active" : ""}"
-        data-slug="${project.slug}"
+    .map((project, index) => `
+      <article
+        class="admin-project-item${project.slug === state.selectedSlug ? " is-active" : ""}${project.slug === state.draggingSlug ? " is-dragging" : ""}"
+        data-slug="${escapeHtml(project.slug)}"
+        draggable="true"
       >
-        <strong>${project.title}</strong>
-        <span>${project.slug}</span>
-      </button>
+        <button class="admin-project-main" type="button" data-select-slug="${escapeHtml(project.slug)}">
+          <strong>${escapeHtml(project.title)}</strong>
+          <span>${escapeHtml(project.slug)} / #${index + 1}</span>
+        </button>
+        <div class="admin-project-actions" aria-label="Reorder ${escapeHtml(project.title)}">
+          <button
+            class="admin-project-move"
+            type="button"
+            data-move-slug="${escapeHtml(project.slug)}"
+            data-direction="-1"
+            ${index === 0 || state.isReordering ? "disabled" : ""}
+          >Up</button>
+          <button
+            class="admin-project-move"
+            type="button"
+            data-move-slug="${escapeHtml(project.slug)}"
+            data-direction="1"
+            ${index === state.projects.length - 1 || state.isReordering ? "disabled" : ""}
+          >Down</button>
+        </div>
+      </article>
     `)
     .join("");
 
-  list.querySelectorAll("[data-slug]").forEach((button) => {
+  list.querySelectorAll("[data-select-slug]").forEach((button) => {
     button.addEventListener("click", () => {
-      selectProject(button.dataset.slug);
+      selectProject(button.dataset.selectSlug);
     });
   });
+
+  list.querySelectorAll("[data-move-slug]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      await moveProject(button.dataset.moveSlug, Number(button.dataset.direction));
+    });
+  });
+
+  list.querySelectorAll("[draggable='true']").forEach((item) => {
+    item.addEventListener("dragstart", (event) => {
+      state.draggingSlug = item.dataset.slug;
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", item.dataset.slug);
+      item.classList.add("is-dragging");
+    });
+
+    item.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      item.classList.add("is-drop-target");
+    });
+
+    item.addEventListener("dragleave", () => {
+      item.classList.remove("is-drop-target");
+    });
+
+    item.addEventListener("drop", async (event) => {
+      event.preventDefault();
+      item.classList.remove("is-drop-target");
+
+      const sourceSlug = event.dataTransfer.getData("text/plain") || state.draggingSlug;
+      const targetSlug = item.dataset.slug;
+      const rect = item.getBoundingClientRect();
+      const placement = event.clientY > rect.top + rect.height / 2 ? "after" : "before";
+
+      await moveProjectTo(sourceSlug, targetSlug, placement);
+    });
+
+    item.addEventListener("dragend", () => {
+      state.draggingSlug = null;
+      renderProjectList();
+    });
+  });
+}
+
+function escapeHtml(value = "") {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#039;"
+  })[character]);
 }
 
 function fillSiteForm() {
@@ -121,7 +208,7 @@ function fillProjectForm(project) {
     description: "",
     featured: true,
     sortOrder: state.projects.length + 1,
-    mediaType: "placeholder",
+    mediaType: "image",
     mediaSrc: "",
     placeholder: "",
     coverImageKey: "",
@@ -130,9 +217,7 @@ function fillProjectForm(project) {
     responsibilities: [],
     systemFlow: [],
     takeawayTitle: "",
-    takeawayBody: "",
-    codeTitle: "",
-    codeExample: ""
+    takeawayBody: ""
   };
 
   document.getElementById("editor-title").textContent = entry.title || "New project";
@@ -153,14 +238,93 @@ function fillProjectForm(project) {
   document.getElementById("project-system-flow-field").value = arrayToLines(entry.systemFlow);
   document.getElementById("project-takeaway-title-field").value = entry.takeawayTitle || "";
   document.getElementById("project-takeaway-body-field").value = entry.takeawayBody || "";
-  document.getElementById("project-code-title-field").value = entry.codeTitle || "";
-  document.getElementById("project-code-example-field").value = entry.codeExample || "";
 }
 
 function selectProject(slug) {
   state.selectedSlug = slug;
   renderProjectList();
   fillProjectForm(currentProject());
+}
+
+function syncSelectedSortOrder() {
+  const project = currentProject();
+  const input = document.getElementById("project-sort-order");
+  if (project && input) {
+    input.value = project.sortOrder ?? 0;
+  }
+}
+
+async function saveProjectOrder(nextProjects) {
+  if (state.isReordering) {
+    return;
+  }
+
+  const previousProjects = state.projects;
+  const orderedProjects = normalizeProjectOrder(nextProjects);
+
+  state.isReordering = true;
+  state.projects = orderedProjects;
+  renderProjectList();
+  syncSelectedSortOrder();
+  setStatus("Saving project order...");
+
+  try {
+    const payload = await api("/api/admin/projects/reorder", {
+      method: "PUT",
+      body: JSON.stringify({
+        slugs: orderedProjects.map((project) => project.slug)
+      })
+    });
+
+    state.projects = sortedProjects(payload.projects || orderedProjects);
+    setStatus("Project order saved.");
+  } catch (error) {
+    state.projects = previousProjects;
+    setStatus(error.message, true);
+  } finally {
+    state.isReordering = false;
+    state.draggingSlug = null;
+    renderProjectList();
+    syncSelectedSortOrder();
+  }
+}
+
+async function moveProject(slug, direction) {
+  const currentIndex = state.projects.findIndex((project) => project.slug === slug);
+  const nextIndex = currentIndex + direction;
+
+  if (currentIndex < 0 || nextIndex < 0 || nextIndex >= state.projects.length) {
+    return;
+  }
+
+  const nextProjects = [...state.projects];
+  [nextProjects[currentIndex], nextProjects[nextIndex]] = [
+    nextProjects[nextIndex],
+    nextProjects[currentIndex]
+  ];
+
+  await saveProjectOrder(nextProjects);
+}
+
+async function moveProjectTo(sourceSlug, targetSlug, placement) {
+  if (!sourceSlug || !targetSlug || sourceSlug === targetSlug) {
+    return;
+  }
+
+  const nextProjects = [...state.projects];
+  const sourceIndex = nextProjects.findIndex((project) => project.slug === sourceSlug);
+  const targetIndex = nextProjects.findIndex((project) => project.slug === targetSlug);
+
+  if (sourceIndex < 0 || targetIndex < 0) {
+    return;
+  }
+
+  const [project] = nextProjects.splice(sourceIndex, 1);
+  const adjustedTargetIndex = nextProjects.findIndex((item) => item.slug === targetSlug);
+  const insertIndex = placement === "after" ? adjustedTargetIndex + 1 : adjustedTargetIndex;
+  nextProjects.splice(insertIndex, 0, project);
+
+  await saveProjectOrder(nextProjects);
 }
 
 function readProjectForm() {
@@ -181,9 +345,7 @@ function readProjectForm() {
     responsibilities: linesToArray(document.getElementById("project-responsibilities-field").value),
     systemFlow: linesToArray(document.getElementById("project-system-flow-field").value),
     takeawayTitle: document.getElementById("project-takeaway-title-field").value.trim(),
-    takeawayBody: document.getElementById("project-takeaway-body-field").value.trim(),
-    codeTitle: document.getElementById("project-code-title-field").value.trim(),
-    codeExample: document.getElementById("project-code-example-field").value
+    takeawayBody: document.getElementById("project-takeaway-body-field").value.trim()
   };
 }
 
@@ -210,7 +372,7 @@ function readSiteForm() {
 async function loadDashboard() {
   const payload = await api("/api/admin/bootstrap", { method: "GET" });
   state.site = payload.site || {};
-  state.projects = payload.projects || [];
+  state.projects = sortedProjects(payload.projects || []);
   fillSiteForm();
   renderProjectList();
   selectProject(state.projects[0]?.slug || null);
@@ -245,7 +407,7 @@ async function saveProject() {
     state.projects.push(saved);
   }
 
-  state.projects.sort((a, b) => a.sortOrder - b.sortOrder);
+  state.projects = sortedProjects(state.projects);
   state.selectedSlug = saved.slug;
   renderProjectList();
   fillProjectForm(saved);
@@ -270,20 +432,27 @@ async function deleteProject() {
   setStatus(`Deleted project "${project.title}".`);
 }
 
-async function uploadCoverImage() {
+function mediaKeyForFile(slug, file) {
+  const extension = file.name.includes(".")
+    ? file.name.slice(file.name.lastIndexOf("."))
+    : file.type.startsWith("video/")
+      ? ".mp4"
+      : ".jpg";
+  const mediaName = file.type.startsWith("video/") ? "video" : "cover";
+  return `projects/${slug}/${mediaName}${extension.toLowerCase()}`;
+}
+
+async function uploadProjectMedia() {
   const slug = document.getElementById("project-slug").value.trim();
   const fileInput = document.getElementById("project-cover-upload");
   const file = fileInput.files?.[0];
 
   if (!slug || !file) {
-    setStatus("Set a slug and choose an image before uploading.", true);
+    setStatus("Set a slug and choose an image or video before uploading.", true);
     return;
   }
 
-  const extension = file.name.includes(".")
-    ? file.name.slice(file.name.lastIndexOf("."))
-    : ".jpg";
-  const key = `projects/${slug}/cover${extension.toLowerCase()}`;
+  const key = mediaKeyForFile(slug, file);
   const formData = new FormData();
   formData.append("file", file);
   formData.append("key", key);
@@ -302,8 +471,16 @@ async function uploadCoverImage() {
   }
 
   const payload = await response.json();
-  document.getElementById("project-cover-image-key").value = payload.key;
-  setStatus(`Uploaded cover image to ${payload.key}.`);
+  if (file.type.startsWith("video/")) {
+    document.getElementById("project-media-type").value = "video";
+    document.getElementById("project-media-src").value = payload.key;
+  } else {
+    document.getElementById("project-media-type").value = "image";
+    document.getElementById("project-cover-image-key").value = payload.key;
+  }
+
+  fileInput.value = "";
+  setStatus(`Uploaded project media to ${payload.key}.`);
 }
 
 function bindEvents() {
@@ -352,7 +529,7 @@ function bindEvents() {
 
   document.getElementById("upload-cover").addEventListener("click", async () => {
     try {
-      await uploadCoverImage();
+      await uploadProjectMedia();
     } catch (error) {
       setStatus(error.message, true);
     }

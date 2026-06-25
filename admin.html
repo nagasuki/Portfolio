@@ -87,18 +87,19 @@
             <label>Sort Order <input id="project-sort-order" type="number" min="0"></label>
             <label>Media Type
               <select id="project-media-type">
+                <option value="image">Image</option>
                 <option value="placeholder">Placeholder</option>
                 <option value="video">Video</option>
                 <option value="embed">Embed</option>
               </select>
             </label>
-            <label>Video URL / Embed URL <input id="project-media-src" type="text" placeholder="https://..."></label>
+            <label>Media URL / Embed URL <input id="project-media-src" type="text" placeholder="https://... or projects/slug/video.mp4"></label>
             <label>Placeholder Label <input id="project-placeholder" type="text"></label>
-            <label>Placeholder Image Key <input id="project-cover-image-key" type="text" placeholder="projects/buddy-beater/cover.jpg"></label>
-            <label>Upload Placeholder Image
+            <label>Image Key <input id="project-cover-image-key" type="text" placeholder="projects/buddy-beater/cover.jpg"></label>
+            <label>Upload Image or Video
               <div class="admin-upload-row">
-                <input id="project-cover-upload" type="file" accept="image/*">
-                <button id="upload-cover" class="button button-secondary" type="button">Upload Image</button>
+                <input id="project-cover-upload" type="file" accept="image/*,video/*">
+                <button id="upload-cover" class="button button-secondary" type="button">Upload Media</button>
               </div>
             </label>
             <label>Tags (one per line) <textarea id="project-tags" rows="5"></textarea></label>
@@ -107,8 +108,6 @@
             <label>System Flow (one per line) <textarea id="project-system-flow-field" rows="6"></textarea></label>
             <label>Takeaway Title <input id="project-takeaway-title-field" type="text"></label>
             <label>Takeaway Body <textarea id="project-takeaway-body-field" rows="4"></textarea></label>
-            <label>Code Title <input id="project-code-title-field" type="text"></label>
-            <label>Code Example <textarea id="project-code-example-field" rows="10"></textarea></label>
           </div>
         </section>
       </div>
