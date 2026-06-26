@@ -58,9 +58,22 @@ function previewVideoSrc(src) {
   return `${src}#t=0.1`;
 }
 
-function renderProjectMediaPreview(item) {
+function renderProjectOverlayPreview(item, media = "") {
   const caseStudyUrl = `project.html?slug=${encodeURIComponent(item.slug)}`;
 
+  return `
+    <a class="showcase-video-link" href="${caseStudyUrl}" aria-label="Open ${escapeHtml(item.title)} case study">
+      ${media}
+      <span class="showcase-video-panel" aria-hidden="true">
+        <span class="placeholder-label">${escapeHtml(item.title)}</span>
+        <span class="showcase-video-title">${escapeHtml(item.title)}</span>
+        <span class="showcase-video-caption">${escapeHtml(item.kicker)}</span>
+      </span>
+    </a>
+  `;
+}
+
+function renderProjectMediaPreview(item) {
   if (item.mediaType === "video" && item.mediaSrc) {
     const thumbnail = item.coverImage
       ? `
@@ -76,28 +89,21 @@ function renderProjectMediaPreview(item) {
         </video>
       `;
 
-    return `
-      <a class="showcase-video-link" href="${caseStudyUrl}" aria-label="Open ${escapeHtml(item.title)} case study">
-        ${thumbnail}
-        <span class="showcase-video-panel" aria-hidden="true">
-          <span class="placeholder-label">${escapeHtml(item.title)}</span>
-          <span class="showcase-video-title">${escapeHtml(item.title)}</span>
-          <span class="showcase-video-caption">${escapeHtml(item.kicker)}</span>
-        </span>
-      </a>
-    `;
+    return renderProjectOverlayPreview(item, thumbnail);
   }
 
   if (item.mediaType === "embed" && item.mediaSrc) {
-    return `
-      <iframe
-        src="${escapeHtml(item.mediaSrc)}"
-        title="${escapeHtml(item.title)}"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    `;
+    const thumbnail = item.coverImage
+      ? `
+        <img
+          src="${escapeHtml(item.coverImage)}"
+          alt="${escapeHtml(item.title)}"
+          class="showcase-video-thumbnail"
+        >
+      `
+      : "";
+
+    return renderProjectOverlayPreview(item, thumbnail);
   }
 
   if (item.mediaType === "image" && (item.coverImage || item.mediaSrc)) {
