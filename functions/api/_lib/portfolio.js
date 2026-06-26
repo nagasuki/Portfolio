@@ -67,14 +67,23 @@ export function projectFromRow(row, assetBaseUrl = "") {
 }
 
 export function buildAssetUrl(assetBaseUrl = "", key = "") {
-  if (!assetBaseUrl || !key) {
+  if (!key) {
     return "";
+  }
+
+  if (/^https?:\/\//i.test(key) || key.startsWith("/")) {
+    return key;
+  }
+
+  const normalizedKey = key;
+
+  if (!assetBaseUrl) {
+    return `/api/media/${encodeURI(normalizedKey)}`;
   }
 
   const normalizedBase = assetBaseUrl.endsWith("/")
     ? assetBaseUrl
     : `${assetBaseUrl}/`;
-  const normalizedKey = key.startsWith("/") ? key.slice(1) : key;
   return `${normalizedBase}${normalizedKey}`;
 }
 
