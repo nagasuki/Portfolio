@@ -1,0 +1,1 @@
+ALTER TABLE projects ADD COLUMN demo_url TEXT NOT NULL DEFAULT '';

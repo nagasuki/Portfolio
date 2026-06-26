@@ -26,7 +26,7 @@ for (const project of payload.projects || []) {
     `INSERT INTO projects (
       slug, title, kicker, summary, description, tags, featured, sort_order,
       media_type, media_src, placeholder, stack, responsibilities, system_flow,
-      takeaway_title, takeaway_body, code_title, code_example, cover_image_key,
+      takeaway_title, takeaway_body, code_title, code_example, cover_image_key, demo_url,
       published, updated_at
     ) VALUES (
       ${quote(project.slug)},
@@ -48,6 +48,7 @@ for (const project of payload.projects || []) {
       ${quote(project.codeTitle || "")},
       ${quote(project.codeExample || "")},
       ${quote(project.coverImageKey || "")},
+      ${quote(project.demoUrl || "")},
       ${project.published === false ? 0 : 1},
       CURRENT_TIMESTAMP
     );`

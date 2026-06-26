@@ -61,6 +61,7 @@ export function projectFromRow(row, assetBaseUrl = "") {
     codeExample: row.code_example,
     coverImageKey: row.cover_image_key,
     coverImage,
+    demoUrl: row.demo_url || "",
     published: Boolean(row.published),
     updatedAt: row.updated_at
   };
@@ -148,11 +149,23 @@ export function normalizeProjectPayload(payload) {
     codeTitle: String(payload.codeTitle || "").trim(),
     codeExample: String(payload.codeExample || ""),
     coverImageKey: String(payload.coverImageKey || "").trim(),
+    demoUrl: String(payload.demoUrl || "").trim(),
     published: payload.published === false ? 0 : 1
   };
 }
 
+async function ensureProjectSchema(env) {
+  const columns = await env.DB.prepare("PRAGMA table_info(projects)").all();
+  const hasDemoUrl = (columns.results || []).some((column) => column.name === "demo_url");
+
+  if (!hasDemoUrl) {
+    await env.DB.prepare("ALTER TABLE projects ADD COLUMN demo_url TEXT NOT NULL DEFAULT ''").run();
+  }
+}
+
 export async function upsertProject(env, payload, originalSlug = null) {
+  await ensureProjectSchema(env);
+
   const project = normalizeProjectPayload(payload);
 
   if (!project.slug || !project.title || !project.summary) {
@@ -166,10 +179,10 @@ export async function upsertProject(env, payload, originalSlug = null) {
     `INSERT INTO projects (
       slug, title, kicker, summary, description, tags, featured, sort_order,
       media_type, media_src, placeholder, stack, responsibilities, system_flow,
-      takeaway_title, takeaway_body, code_title, code_example, cover_image_key,
+      takeaway_title, takeaway_body, code_title, code_example, cover_image_key, demo_url,
       published, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     ON CONFLICT(slug) DO UPDATE SET
       slug = excluded.slug,
       title = excluded.title,
@@ -190,6 +203,7 @@ export async function upsertProject(env, payload, originalSlug = null) {
       code_title = excluded.code_title,
       code_example = excluded.code_example,
       cover_image_key = excluded.cover_image_key,
+      demo_url = excluded.demo_url,
       published = excluded.published,
       updated_at = CURRENT_TIMESTAMP`
   )
@@ -213,6 +227,7 @@ export async function upsertProject(env, payload, originalSlug = null) {
       project.codeTitle,
       project.codeExample,
       project.coverImageKey,
+      project.demoUrl,
       project.published
     )
     .run();

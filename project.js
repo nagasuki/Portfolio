@@ -50,6 +50,17 @@ function renderList(id, items) {
     .join("");
 }
 
+function renderActions(project) {
+  const element = document.getElementById("project-actions");
+  if (!element) {
+    return;
+  }
+
+  element.innerHTML = project.demoUrl
+    ? `<a class="button button-primary" href="${escapeHtml(project.demoUrl)}" target="_blank" rel="noreferrer">Try Project</a>`
+    : "";
+}
+
 function renderMedia(project) {
   const container = document.getElementById("project-media");
   if (!container) {
@@ -128,6 +139,7 @@ async function bootstrap() {
   renderList("project-stack", project.stack);
   renderList("project-responsibilities", project.responsibilities);
   renderList("project-system-flow", project.systemFlow);
+  renderActions(project);
   renderMedia(project);
 }
 

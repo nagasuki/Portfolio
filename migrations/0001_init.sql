@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS projects (
   code_title TEXT NOT NULL DEFAULT '',
   code_example TEXT NOT NULL DEFAULT '',
   cover_image_key TEXT NOT NULL DEFAULT '',
+  demo_url TEXT NOT NULL DEFAULT '',
   published INTEGER NOT NULL DEFAULT 1,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

@@ -238,6 +238,9 @@ function renderFeaturedProjects(projects) {
     .map((item) => {
       const media = renderProjectMediaPreview(item);
       const tags = renderList(item.tags || [], (tag) => `<li>${escapeHtml(tag)}</li>`);
+      const demoAction = item.demoUrl
+        ? `<a class="button button-secondary" href="${escapeHtml(item.demoUrl)}" target="_blank" rel="noreferrer">Try Project</a>`
+        : "";
 
       return `
         <article class="showcase-card">
@@ -251,6 +254,7 @@ function renderFeaturedProjects(projects) {
             <ul class="showcase-tags">${tags}</ul>
             <div class="showcase-actions">
               <a class="button button-primary" href="project.html?slug=${encodeURIComponent(item.slug)}">Open Case Study</a>
+              ${demoAction}
             </div>
           </div>
         </article>

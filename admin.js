@@ -210,6 +210,7 @@ function fillProjectForm(project) {
     sortOrder: state.projects.length + 1,
     mediaType: "image",
     mediaSrc: "",
+    demoUrl: "",
     placeholder: "",
     coverImageKey: "",
     tags: [],
@@ -230,6 +231,7 @@ function fillProjectForm(project) {
   document.getElementById("project-sort-order").value = entry.sortOrder ?? 0;
   document.getElementById("project-media-type").value = entry.mediaType || "placeholder";
   document.getElementById("project-media-src").value = entry.mediaSrc || "";
+  document.getElementById("project-demo-url").value = entry.demoUrl || "";
   document.getElementById("project-placeholder").value = entry.placeholder || "";
   document.getElementById("project-cover-image-key").value = entry.coverImageKey || "";
   document.getElementById("project-tags").value = arrayToLines(entry.tags);
@@ -338,6 +340,7 @@ function readProjectForm() {
     sortOrder: Number(document.getElementById("project-sort-order").value || 0),
     mediaType: document.getElementById("project-media-type").value,
     mediaSrc: document.getElementById("project-media-src").value.trim(),
+    demoUrl: document.getElementById("project-demo-url").value.trim(),
     placeholder: document.getElementById("project-placeholder").value.trim(),
     coverImageKey: document.getElementById("project-cover-image-key").value.trim(),
     tags: linesToArray(document.getElementById("project-tags").value),
