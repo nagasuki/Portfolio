@@ -62,15 +62,25 @@ function renderProjectMediaPreview(item) {
   const caseStudyUrl = `project.html?slug=${encodeURIComponent(item.slug)}`;
 
   if (item.mediaType === "video" && item.mediaSrc) {
-    const poster = item.coverImage ? ` poster="${escapeHtml(item.coverImage)}"` : "";
+    const thumbnail = item.coverImage
+      ? `
+        <img
+          src="${escapeHtml(item.coverImage)}"
+          alt="${escapeHtml(item.title)}"
+          class="showcase-video-thumbnail"
+        >
+      `
+      : `
+        <video class="showcase-video-thumbnail" muted playsinline preload="metadata">
+          <source src="${escapeHtml(previewVideoSrc(item.mediaSrc))}">
+        </video>
+      `;
 
     return `
       <a class="showcase-video-link" href="${caseStudyUrl}" aria-label="Open ${escapeHtml(item.title)} case study">
-        <video class="showcase-video-thumbnail" muted playsinline preload="metadata"${poster}>
-          <source src="${escapeHtml(previewVideoSrc(item.mediaSrc))}">
-        </video>
+        ${thumbnail}
         <span class="showcase-video-panel" aria-hidden="true">
-          <span class="placeholder-label">${escapeHtml(item.placeholder || "Gameplay Video Preview")}</span>
+          <span class="placeholder-label">${escapeHtml(item.title)}</span>
           <span class="showcase-video-title">${escapeHtml(item.title)}</span>
           <span class="showcase-video-caption">${escapeHtml(item.kicker)}</span>
         </span>
