@@ -58,6 +58,25 @@ function previewVideoSrc(src) {
   return `${src}#t=0.1`;
 }
 
+function trackAnalyticsEvent(event) {
+  const body = JSON.stringify(event);
+
+  if (navigator.sendBeacon) {
+    const blob = new Blob([body], { type: "application/json" });
+    navigator.sendBeacon("/api/analytics", blob);
+    return;
+  }
+
+  fetch("/api/analytics", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body,
+    keepalive: true
+  }).catch(() => {});
+}
+
 function renderProjectOverlayPreview(item, media = "") {
   const caseStudyUrl = `project.html?slug=${encodeURIComponent(item.slug)}`;
 
@@ -289,6 +308,7 @@ async function bootstrap() {
   renderSite(data.site || {});
   renderFeaturedProjects(data.projects || []);
   initializeRevealObserver();
+  trackAnalyticsEvent({ type: "site_view" });
 }
 
 bootstrap().catch((error) => {

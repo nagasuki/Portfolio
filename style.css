@@ -1013,6 +1013,73 @@ h2 {
   opacity: 0.42;
 }
 
+.analytics-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.analytics-stat,
+.analytics-project-row {
+  border: 1px solid var(--line);
+  background: rgba(6, 16, 10, 0.82);
+}
+
+.analytics-stat {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.analytics-stat span,
+.analytics-project-row span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.analytics-stat strong {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.analytics-projects {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.analytics-project-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.analytics-project-row div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.analytics-project-row strong,
+.analytics-project-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analytics-project-row b {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
 .admin-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1125,6 +1192,7 @@ h2 {
 
   .hero-actions,
   .hero-metrics,
+  .analytics-summary,
   .contact-links,
   .showcase-actions,
   .admin-auth-row,

@@ -2,6 +2,7 @@ const state = {
   token: sessionStorage.getItem("portfolio-admin-token") || "",
   site: null,
   projects: [],
+  analytics: null,
   selectedSlug: null,
   draggingSlug: null,
   isReordering: false
@@ -41,6 +42,15 @@ function normalizeProjectOrder(projects) {
     ...project,
     sortOrder: index + 1
   }));
+}
+
+function formatCount(value) {
+  return new Intl.NumberFormat("en-US").format(Number(value || 0));
+}
+
+function projectViewCount(slug) {
+  const project = state.analytics?.projectViews?.find((item) => item.slug === slug);
+  return project?.count || 0;
 }
 
 async function api(path, options = {}) {
@@ -97,7 +107,7 @@ function renderProjectList() {
       >
         <button class="admin-project-main" type="button" data-select-slug="${escapeHtml(project.slug)}">
           <strong>${escapeHtml(project.title)}</strong>
-          <span>${escapeHtml(project.slug)} / #${index + 1}</span>
+          <span>${escapeHtml(project.slug)} / #${index + 1} / ${formatCount(projectViewCount(project.slug))} views</span>
         </button>
         <div class="admin-project-actions" aria-label="Reorder ${escapeHtml(project.title)}">
           <button
@@ -166,6 +176,43 @@ function renderProjectList() {
       renderProjectList();
     });
   });
+}
+
+function renderAnalytics() {
+  const summary = document.getElementById("analytics-summary");
+  const projects = document.getElementById("analytics-projects");
+  if (!summary || !projects) {
+    return;
+  }
+
+  const analytics = state.analytics || {
+    siteViews: 0,
+    totalProjectViews: 0,
+    projectViews: []
+  };
+
+  summary.innerHTML = `
+    <article class="analytics-stat">
+      <span>Homepage views</span>
+      <strong>${formatCount(analytics.siteViews)}</strong>
+    </article>
+    <article class="analytics-stat">
+      <span>Project views</span>
+      <strong>${formatCount(analytics.totalProjectViews)}</strong>
+    </article>
+  `;
+
+  projects.innerHTML = (analytics.projectViews || [])
+    .map((project) => `
+      <article class="analytics-project-row">
+        <div>
+          <strong>${escapeHtml(project.title)}</strong>
+          <span>${escapeHtml(project.slug)}</span>
+        </div>
+        <b>${formatCount(project.count)}</b>
+      </article>
+    `)
+    .join("");
 }
 
 function escapeHtml(value = "") {
@@ -376,10 +423,19 @@ async function loadDashboard() {
   const payload = await api("/api/admin/bootstrap", { method: "GET" });
   state.site = payload.site || {};
   state.projects = sortedProjects(payload.projects || []);
+  state.analytics = await api("/api/analytics", { method: "GET" });
   fillSiteForm();
+  renderAnalytics();
   renderProjectList();
   selectProject(state.projects[0]?.slug || null);
   setStatus("Connected to portfolio admin.");
+}
+
+async function loadAnalytics() {
+  state.analytics = await api("/api/analytics", { method: "GET" });
+  renderAnalytics();
+  renderProjectList();
+  setStatus("Analytics refreshed.");
 }
 
 async function saveSite() {
@@ -512,6 +568,14 @@ function bindEvents() {
     state.selectedSlug = null;
     renderProjectList();
     fillProjectForm(null);
+  });
+
+  document.getElementById("refresh-analytics").addEventListener("click", async () => {
+    try {
+      await loadAnalytics();
+    } catch (error) {
+      setStatus(error.message, true);
+    }
   });
 
   document.getElementById("save-project").addEventListener("click", async () => {

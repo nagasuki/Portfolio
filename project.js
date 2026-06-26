@@ -50,6 +50,25 @@ function renderList(id, items) {
     .join("");
 }
 
+function trackAnalyticsEvent(event) {
+  const body = JSON.stringify(event);
+
+  if (navigator.sendBeacon) {
+    const blob = new Blob([body], { type: "application/json" });
+    navigator.sendBeacon("/api/analytics", blob);
+    return;
+  }
+
+  fetch("/api/analytics", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body,
+    keepalive: true
+  }).catch(() => {});
+}
+
 function renderActions(project) {
   const element = document.getElementById("project-actions");
   if (!element) {
@@ -141,6 +160,11 @@ async function bootstrap() {
   renderList("project-system-flow", project.systemFlow);
   renderActions(project);
   renderMedia(project);
+  trackAnalyticsEvent({
+    type: "project_view",
+    slug: project.slug,
+    label: project.title
+  });
 }
 
 bootstrap().catch((error) => {
