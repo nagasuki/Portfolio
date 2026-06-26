@@ -50,6 +50,73 @@ function setImage(id, src, alt) {
   }
 }
 
+function previewVideoSrc(src) {
+  if (!src || src.includes("#")) {
+    return src;
+  }
+
+  return `${src}#t=0.1`;
+}
+
+function renderProjectMediaPreview(item) {
+  const caseStudyUrl = `project.html?slug=${encodeURIComponent(item.slug)}`;
+
+  if (item.mediaType === "video" && item.mediaSrc) {
+    const poster = item.coverImage ? ` poster="${escapeHtml(item.coverImage)}"` : "";
+
+    return `
+      <a class="showcase-video-link" href="${caseStudyUrl}" aria-label="Open ${escapeHtml(item.title)} case study">
+        <video class="showcase-video-thumbnail" muted playsinline preload="metadata"${poster}>
+          <source src="${escapeHtml(previewVideoSrc(item.mediaSrc))}">
+        </video>
+        <span class="showcase-play-indicator" aria-hidden="true"></span>
+      </a>
+    `;
+  }
+
+  if (item.mediaType === "embed" && item.mediaSrc) {
+    return `
+      <iframe
+        src="${escapeHtml(item.mediaSrc)}"
+        title="${escapeHtml(item.title)}"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    `;
+  }
+
+  if (item.mediaType === "image" && (item.coverImage || item.mediaSrc)) {
+    return `
+      <img
+        src="${escapeHtml(item.coverImage || item.mediaSrc)}"
+        alt="${escapeHtml(item.title)}"
+        class="showcase-cover-image"
+      >
+    `;
+  }
+
+  if (item.coverImage) {
+    return `
+      <img
+        src="${escapeHtml(item.coverImage)}"
+        alt="${escapeHtml(item.title)}"
+        class="showcase-cover-image"
+      >
+    `;
+  }
+
+  return `
+    <div class="showcase-placeholder">
+      <div class="placeholder-content">
+        <span class="placeholder-label">${escapeHtml(item.placeholder)}</span>
+        <h3 class="placeholder-title">${escapeHtml(item.title)}</h3>
+        <p class="placeholder-caption">${escapeHtml(item.kicker)}</p>
+      </div>
+    </div>
+  `;
+}
+
 function renderSite(site) {
   const hero = site.hero || {};
   const about = site.about || {};
@@ -149,49 +216,7 @@ function renderFeaturedProjects(projects) {
 
   showcaseGrid.innerHTML = featuredProjects
     .map((item) => {
-      const media =
-        item.mediaType === "video" && item.mediaSrc
-          ? `
-            <video controls muted playsinline preload="metadata">
-              <source src="${escapeHtml(item.mediaSrc)}">
-            </video>
-          `
-          : item.mediaType === "embed" && item.mediaSrc
-            ? `
-              <iframe
-                src="${escapeHtml(item.mediaSrc)}"
-                title="${escapeHtml(item.title)}"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            `
-            : item.mediaType === "image" && (item.coverImage || item.mediaSrc)
-              ? `
-                <img
-                  src="${escapeHtml(item.coverImage || item.mediaSrc)}"
-                  alt="${escapeHtml(item.title)}"
-                  class="showcase-cover-image"
-                >
-              `
-              : item.coverImage
-                ? `
-                  <img
-                    src="${escapeHtml(item.coverImage)}"
-                    alt="${escapeHtml(item.title)}"
-                    class="showcase-cover-image"
-                  >
-                `
-                : `
-                  <div class="showcase-placeholder">
-                    <div class="placeholder-content">
-                      <span class="placeholder-label">${escapeHtml(item.placeholder)}</span>
-                      <h3 class="placeholder-title">${escapeHtml(item.title)}</h3>
-                      <p class="placeholder-caption">${escapeHtml(item.kicker)}</p>
-                    </div>
-                  </div>
-                `;
-
+      const media = renderProjectMediaPreview(item);
       const tags = renderList(item.tags || [], (tag) => `<li>${escapeHtml(tag)}</li>`);
 
       return `

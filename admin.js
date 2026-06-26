@@ -480,7 +480,7 @@ async function uploadProjectMedia() {
   }
 
   fileInput.value = "";
-  setStatus(`Uploaded project media to ${payload.key}.`);
+  setStatus(`Uploaded project media to ${payload.key}. Save Project to publish it.`);
 }
 
 function bindEvents() {
