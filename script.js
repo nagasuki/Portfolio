@@ -69,7 +69,7 @@ function renderProjectMediaPreview(item) {
         <video class="showcase-video-thumbnail" muted playsinline preload="metadata"${poster}>
           <source src="${escapeHtml(previewVideoSrc(item.mediaSrc))}">
         </video>
-        <span class="showcase-play-indicator" aria-hidden="true"></span>
+        <span class="showcase-video-label" aria-hidden="true">Gameplay Video Preview</span>
       </a>
     `;
   }

@@ -432,49 +432,52 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(2, 6, 4, 0.02), rgba(2, 6, 4, 0.42));
+  background:
+    linear-gradient(180deg, rgba(2, 6, 4, 0.2), rgba(2, 6, 4, 0.54)),
+    rgba(0, 0, 0, 0.18);
   pointer-events: none;
 }
 
-.showcase-play-indicator {
+.showcase-video-label {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
   z-index: 1;
-  width: 64px;
-  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
   border: 1px solid rgba(237, 247, 239, 0.32);
-  border-radius: 50%;
+  border-radius: 999px;
   background: rgba(4, 16, 8, 0.72);
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
-  transform: translate(-50%, -50%);
+  backdrop-filter: blur(12px);
   transition:
     background 180ms ease,
     border-color 180ms ease,
     transform 180ms ease;
 }
 
-.showcase-play-indicator::before {
-  content: "";
-  position: absolute;
-  left: 25px;
-  top: 20px;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 18px solid var(--primary);
-}
-
 .showcase-video-link:hover .showcase-video-thumbnail,
 .showcase-video-link:focus-visible .showcase-video-thumbnail {
-  filter: brightness(1.08) saturate(1.04);
+  filter: brightness(1.02) saturate(1.02);
   transform: scale(1.02);
 }
 
-.showcase-video-link:hover .showcase-play-indicator,
-.showcase-video-link:focus-visible .showcase-play-indicator {
+.showcase-video-link:hover .showcase-video-label,
+.showcase-video-link:focus-visible .showcase-video-label {
   border-color: rgba(237, 247, 239, 0.5);
   background: rgba(4, 16, 8, 0.86);
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: translateY(-2px);
 }
 
 .showcase-cover-image,
