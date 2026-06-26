@@ -712,6 +712,21 @@ h2 {
   overflow: hidden;
 }
 
+.detail-hero-copy {
+  display: grid;
+  gap: 22px;
+}
+
+.detail-page h1 {
+  max-width: 100%;
+}
+
+.detail-hero-copy .hero-text {
+  width: 100%;
+  max-width: 96ch;
+  margin-bottom: 0;
+}
+
 .detail-hero-copy,
 .detail-hero-media,
 .detail-block,
