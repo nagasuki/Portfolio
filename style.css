@@ -390,7 +390,9 @@ h2 {
 .showcase-card {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  align-items: stretch;
   gap: 0;
+  min-height: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 30px;
@@ -404,14 +406,18 @@ h2 {
 
 .showcase-card:not(:first-child) {
   grid-template-columns: 1fr;
+  grid-template-rows: 260px minmax(0, 1fr);
 }
 
 .showcase-card:not(:first-child) .showcase-media {
-  min-height: 260px;
+  min-height: 0;
+  height: 260px;
 }
 
 .showcase-card:not(:first-child) .showcase-info {
   align-content: start;
+  grid-template-rows: auto auto minmax(132px, auto) minmax(96px, 1fr) auto;
+  height: 100%;
 }
 
 .showcase-card:not(:first-child) .showcase-info h3 {
@@ -592,6 +598,7 @@ h2 {
 .showcase-actions {
   display: flex;
   gap: 12px;
+  align-self: end;
   margin-top: 4px;
 }
 
@@ -620,6 +627,8 @@ h2 {
 .showcase-tags {
   display: flex;
   flex-wrap: wrap;
+  align-content: start;
+  align-self: start;
   gap: 10px;
   padding: 0;
   margin: 0;
@@ -1171,6 +1180,16 @@ h2 {
 
   .section-heading h2 {
     max-width: 100%;
+  }
+
+  .showcase-card:not(:first-child),
+  .showcase-card:not(:first-child) .showcase-info {
+    grid-template-rows: none;
+  }
+
+  .showcase-card:not(:first-child) .showcase-media {
+    height: auto;
+    min-height: 260px;
   }
 }
 
