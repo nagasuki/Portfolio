@@ -90,9 +90,12 @@ function renderMedia(project) {
     return;
   }
 
+  container.classList.remove("is-video");
+
   if (project.mediaType === "video" && project.mediaSrc) {
+    container.classList.add("is-video");
     container.innerHTML = `
-      <video controls muted playsinline preload="metadata">
+      <video controls muted playsinline preload="metadata" class="project-video-player">
         <source src="${escapeHtml(project.mediaSrc)}">
       </video>
     `;
