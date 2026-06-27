@@ -59,22 +59,26 @@ function previewVideoSrc(src) {
 }
 
 function trackAnalyticsEvent(event) {
-  const body = JSON.stringify(event);
+  try {
+    const body = JSON.stringify(event);
 
-  if (navigator.sendBeacon) {
-    const blob = new Blob([body], { type: "application/json" });
-    navigator.sendBeacon("/api/analytics", blob);
-    return;
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "application/json" });
+      navigator.sendBeacon("/api/analytics", blob);
+      return;
+    }
+
+    fetch("/api/analytics", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  } catch {
+    // Analytics must never block portfolio rendering.
   }
-
-  fetch("/api/analytics", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body,
-    keepalive: true
-  }).catch(() => {});
 }
 
 function renderProjectOverlayPreview(item, media = "") {
@@ -285,6 +289,11 @@ function renderFeaturedProjects(projects) {
 function initializeRevealObserver() {
   const revealItems = document.querySelectorAll(".reveal");
 
+  if (!("IntersectionObserver" in window)) {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -301,6 +310,15 @@ function initializeRevealObserver() {
   );
 
   revealItems.forEach((item) => observer.observe(item));
+
+  window.setTimeout(() => {
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("is-visible")) {
+        item.classList.add("is-visible");
+        observer.unobserve(item);
+      }
+    });
+  }, 900);
 }
 
 async function bootstrap() {

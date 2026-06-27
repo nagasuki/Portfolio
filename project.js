@@ -51,22 +51,26 @@ function renderList(id, items) {
 }
 
 function trackAnalyticsEvent(event) {
-  const body = JSON.stringify(event);
+  try {
+    const body = JSON.stringify(event);
 
-  if (navigator.sendBeacon) {
-    const blob = new Blob([body], { type: "application/json" });
-    navigator.sendBeacon("/api/analytics", blob);
-    return;
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "application/json" });
+      navigator.sendBeacon("/api/analytics", blob);
+      return;
+    }
+
+    fetch("/api/analytics", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  } catch {
+    // Analytics must never block project rendering.
   }
-
-  fetch("/api/analytics", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body,
-    keepalive: true
-  }).catch(() => {});
 }
 
 function renderActions(project) {
